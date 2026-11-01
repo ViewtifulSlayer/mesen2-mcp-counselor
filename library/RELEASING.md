@@ -149,7 +149,13 @@ jobs requesting them are cancelled.
 | Server release assets | Releases page, tag `vX.Y.Z` | Permanent |
 | Library bundle zips | Releases page, tag `library-vX.Y.Z` | Permanent |
 | Bundle checksums (`SHA256SUMS.txt`) | Same release as the zips | Permanent |
+| Landing page (`docs/`) | GitHub Pages, deployed by `.github/workflows/pages.yml` | Replaced on every push that touches `docs/` |
 | CI logs | The Actions run | Repository default |
+
+Pages has to be switched to source "GitHub Actions" once, in Settings -> Pages.
+Until then the deploy job fails at `configure-pages`, which cannot enable Pages
+with the default `GITHUB_TOKEN`. The page itself is a single static file, so the
+workflow has no build step: it tars `docs/` and deploys it.
 
 A local `dist/` directory is scratch space. The runner builds into its own
 `dist/` and discards it after upload, so anything in your working copy is a

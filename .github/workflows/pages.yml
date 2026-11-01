@@ -1,0 +1,64 @@
+name: Deploy landing page
+
+# Publishes docs/ to GitHub Pages whenever the page changes.
+#
+# One-time setup: Settings -> Pages -> Source: "GitHub Actions". Until that
+# switch is made the deploy job fails with "Get Pages site failed", because
+# configure-pages cannot enable Pages with the default GITHUB_TOKEN (its
+# enablement input needs a token with administration:write).
+#
+# The page is a single static file, so there is no build step: the docs folder
+# is tarred as-is and deployed. Keep the site self-contained; anything fetched
+# from a CDN at runtime is a dependency this workflow cannot verify.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+# Documented shape for Pages deployments: the build job reads the site config,
+# the deploy job exchanges the OIDC token for a deployment.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time, and never cancel one that is already publishing.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Package the page
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload the docs folder
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
+          # Keep .nojekyll so the folder also works if the site is ever served
+          # from a branch instead of from Actions.
+          include-hidden-files: true
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

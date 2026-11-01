@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Counselor Library - game context packs for Mesen2 MCP</title>
+<meta name="description" content="Game-context packs for Mesen2 MCP: verified systems, maps, data tables, RAM probes, and regional differences so an agent can play, test, reverse-engineer, or patch a specific game without guessing.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Counselor Library - game context packs for Mesen2 MCP">
+<meta property="og:description" content="Context dossiers for specific games: what they are, how their systems work, where things are, what the numbers mean, and how to probe them. No spoiler gates, no ROMs, no copyrighted text.">
+<!-- Update this once Pages has a custom domain. -->
+<meta property="og:url" content="https://viewtifulslayer.github.io/mesen2-mcp-counselor/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%237c2d2d'/%3E%3Cpath d='M18 16h24a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H18z' fill='%23f6f2e8'/%3E%3Cpath d='M26 16h6v18l-3-3-3 3z' fill='%237c2d2d'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --ink: #14171c;
+    --ink-soft: #4b525a;
+    --paper: #f7f3e9;
+    --paper-2: #efe9db;
+    --paper-3: #e7dfcd;
+    --line: #d7cdb8;
+    --line-soft: #e4dcc9;
+    --accent: #7c2d2d;
+    --accent-2: #1f5f5b;
+    --gold: #8d6a20;
+    --code-bg: #191c21;
+    --code-ink: #ece6d6;
+    --shadow: 0 1px 2px rgba(20, 23, 28, .06), 0 8px 24px rgba(20, 23, 28, .06);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f0eadb;
+      --ink-soft: #aab1bb;
+      --paper: #12141a;
+      --paper-2: #191c22;
+      --paper-3: #20242c;
+      --line: #2f343d;
+      --line-soft: #262b33;
+      --accent: #d68f8f;
+      --accent-2: #7cc3bb;
+      --gold: #d8b05c;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 30px rgba(0, 0, 0, .35);
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1100px 420px at 15% -10%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%),
+      var(--paper);
+    color: var(--ink);
+    font: 16px/1.65 var(--sans);
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--accent-2); text-underline-offset: .18em; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+  .skip {
+    position: absolute; left: -999px; top: 0; padding: .6rem 1rem;
+    background: var(--paper); color: var(--ink); z-index: 20; border: 1px solid var(--line);
+  }
+  .skip:focus { left: 1rem; top: 1rem; }
+  .wrap { width: min(1120px, 100%); margin-inline: auto; padding-inline: 24px; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -.01em; margin: 0; }
+  p { margin: 0 0 1rem; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .55rem;
+    font: 600 .72rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .eyebrow::before {
+    content: ""; width: 1.6rem; height: 1px; background: var(--line);
+  }
+  .mono { font-family: var(--mono); font-size: .9em; }
+
+  /* header */
+  .site-head {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .site-head .wrap {
+    display: flex; align-items: center; gap: 1.25rem;
+    min-height: 64px; flex-wrap: wrap; padding-block: .5rem;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: .6rem;
+    color: var(--ink); text-decoration: none; font-family: var(--serif);
+    font-size: 1.12rem; letter-spacing: .01em;
+  }
+  .brand .mark { width: 30px; height: 30px; flex: none; }
+  .brand span.sub {
+    font: 500 .66rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-soft); display: block; margin-top: .15rem;
+  }
+  .site-nav { display: flex; gap: 1.1rem; margin-left: auto; flex-wrap: wrap; }
+  .site-nav a {
+    color: var(--ink-soft); text-decoration: none; font-size: .92rem;
+    padding-block: .25rem; border-bottom: 1px solid transparent;
+  }
+  .site-nav a:hover { color: var(--ink); border-bottom-color: var(--line); }
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .62rem 1rem; border-radius: 6px; text-decoration: none;
+    font-size: .92rem; font-weight: 600; border: 1px solid transparent;
+    transition: transform .12s ease, background-color .12s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  @media (prefers-reduced-motion: reduce) { .btn:hover { transform: none; } }
+  .btn-primary { background: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn-primary { color: #1a1010; } }
+  .btn-ghost { border-color: var(--line); color: var(--ink); background: var(--paper-2); }
+
+  /* hero */
+  .hero { padding: clamp(3rem, 7vw, 6rem) 0 clamp(2.5rem, 5vw, 4rem); }
+  .hero .wrap {
+    display: grid; gap: clamp(2rem, 5vw, 4rem);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+    align-items: center;
+  }
+  @media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
+  .hero h1 {
+    font-size: clamp(2.35rem, 5.2vw, 3.9rem); line-height: 1.03;
+    margin: .9rem 0 1.1rem; text-wrap: balance;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .lead { font-size: clamp(1.02rem, 1.6vw, 1.18rem); color: var(--ink-soft); max-width: 44ch; }
+  .cta-row { display: flex; gap: .7rem; flex-wrap: wrap; margin: 1.6rem 0 1.1rem; }
+  .hero-note { font-size: .86rem; color: var(--ink-soft); }
+  .stats {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem; margin-top: 2.2rem; padding-top: 1.4rem; border-top: 1px solid var(--line);
+  }
+  .stats div strong {
+    display: block; font-family: var(--serif); font-size: 1.6rem; line-height: 1.1;
+    color: var(--ink);
+  }
+  .stats div span { font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+  @media (max-width: 560px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  .dossier {
+    background: var(--paper-2); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: var(--shadow); padding: 1.1rem 1.1rem 1.25rem; position: relative;
+    transform: rotate(-.6deg);
+  }
+  @media (prefers-reduced-motion: reduce) { .dossier { transform: none; } }
+  .dossier::before {
+    content: ""; position: absolute; inset: 6px; border: 1px solid var(--line-soft);
+    border-radius: 7px; pointer-events: none;
+  }
+  .dossier header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft);
+    padding-bottom: .7rem; border-bottom: 1px dashed var(--line);
+  }
+  .dossier h2 { font-size: 1.15rem; margin: .7rem 0 .2rem; }
+  .dossier .plat { font-size: .8rem; color: var(--ink-soft); }
+  .dossier ul { list-style: none; margin: .9rem 0 0; padding: 0; display: grid; gap: .45rem; }
+  .dossier li {
+    display: flex; justify-content: space-between; gap: 1rem;
+    font-size: .86rem; padding-bottom: .45rem; border-bottom: 1px solid var(--line-soft);
+  }
+  .dossier li span:last-child { color: var(--ink-soft); font-family: var(--mono); font-size: .78rem; }
+  .stamp {
+    margin-top: 1rem; display: inline-block; padding: .3rem .55rem; border: 1.5px solid var(--accent);
+    color: var(--accent); border-radius: 4px; font: 700 .68rem/1 var(--sans);
+    letter-spacing: .13em; text-transform: uppercase;
+  }
+
+  /* sections */
+  section { padding-block: clamp(2.4rem, 5vw, 4rem); }
+  section + section { border-top: 1px solid var(--line-soft); }
+  .section-head { display: grid; gap: .6rem; margin-bottom: 1.8rem; }
+  .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .section-head p { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+
+  .cards { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 900px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--paper-2); border: 1px solid var(--line); border-radius: 8px;
+    padding: 1.15rem 1.2rem;
+  }
+  .card h3 { font-size: 1.02rem; margin-bottom: .4rem; }
+  .card p { font-size: .9rem; color: var(--ink-soft); margin: 0; }
+
+  /* packs */
+  .packs { display: grid; gap: 1.1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 820px) { .packs { grid-template-columns: 1fr; } }
+  .pack {
+    background: var(--paper-2); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1.35rem 1.4rem 1.25rem; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: .9rem;
+  }
+  .pack header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+  .pack h3 { font-size: 1.3rem; line-height: 1.2; }
+  .pack .meta { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-top: .35rem; }
+  .score {
+    text-align: right; flex: none;
+    font-family: var(--serif); font-size: 1.5rem; line-height: 1; color: var(--accent);
+  }
+  .score small { display: block; font: 600 .58rem/1.4 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  .pack p { font-size: .93rem; color: var(--ink-soft); margin: 0; }
+  .pack dl { display: grid; grid-template-columns: auto 1fr; gap: .3rem .9rem; margin: 0; font-size: .84rem; }
+  .pack dt { color: var(--ink-soft); }
+  .pack dd { margin: 0; font-family: var(--mono); font-size: .8rem; }
+  .pack .links { margin-top: auto; display: flex; gap: 1rem; font-size: .88rem; flex-wrap: wrap; }
+
+  /* steps */
+  .steps { counter-reset: step; display: grid; gap: 1.5rem; }
+  .step { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 1rem; }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    font-family: var(--serif); font-size: 1.05rem; color: var(--accent);
+    border: 1px solid var(--line); border-radius: 999px; width: 2.2rem; height: 2.2rem;
+    display: grid; place-items: center; background: var(--paper-2);
+  }
+  .step h3 { font-size: 1.05rem; margin-bottom: .35rem; }
+  .step p { font-size: .93rem; color: var(--ink-soft); margin: 0 0 .6rem; }
+
+  pre {
+    margin: 0; background: var(--code-bg); color: var(--code-ink);
+    border-radius: 8px; padding: .9rem 1rem; overflow-x: auto;
+    font: .82rem/1.6 var(--mono); border: 1px solid rgba(255, 255, 255, .08);
+  }
+  pre .c { color: #9aa4b2; }
+  code { font-family: var(--mono); font-size: .88em; }
+  p code, li code, dd code {
+    background: var(--paper-3); padding: .1em .35em; border-radius: 3px; font-size: .84em;
+  }
+  @media (prefers-color-scheme: dark) { p code, li code { background: var(--paper-3); } }
+
+  .split { display: grid; gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+
+  ul.clean { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+  ul.clean li { padding-left: 1.4rem; position: relative; font-size: .94rem; color: var(--ink-soft); }
+  ul.clean li::before {
+    content: ""; position: absolute; left: 0; top: .62em; width: .55rem; height: .55rem;
+    border: 1.5px solid var(--gold); transform: rotate(45deg);
+  }
+  ul.clean li strong { color: var(--ink); font-weight: 600; }
+
+  .callout {
+    border-left: 3px solid var(--accent); background: var(--paper-2);
+    padding: 1.15rem 1.3rem; border-radius: 0 8px 8px 0; margin: 1.6rem 0 0;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout strong { color: var(--accent); }
+
+  .rights-grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 720px) { .rights-grid { grid-template-columns: 1fr; } }
+  .rights-grid .card h3 { display: flex; align-items: center; gap: .5rem; }
+  .no { color: var(--accent); font-weight: 700; }
+
+  footer.site-foot { border-top: 1px solid var(--line); background: var(--paper-2); padding-block: 2.2rem; }
+  footer.site-foot .wrap { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+  @media (max-width: 720px) { footer.site-foot .wrap { grid-template-columns: 1fr; } }
+  footer.site-foot p { font-size: .86rem; color: var(--ink-soft); margin: 0; }
+  footer.site-foot nav { display: flex; flex-wrap: wrap; gap: .35rem 1.2rem; font-size: .88rem; }
+  .colophon { margin-top: 1.4rem; font-size: .76rem; color: var(--ink-soft); }
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Counselor Library home">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <rect width="64" height="64" rx="12" fill="var(--accent)"></rect>
+        <path d="M18 15h23a5 5 0 0 1 5 5v29H18z" fill="var(--paper)"></path>
+        <path d="M26 15h7v19l-3.5-3.5L26 34z" fill="var(--accent)"></path>
+        <path d="M25 30h14M25 36h14M25 42h9" stroke="var(--accent)" stroke-width="2" fill="none" opacity=".55"></path>
+      </svg>
+      <span>Counselor Library<span class="sub">for Mesen2 MCP</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#packs">Packs</a>
+      <a href="#anatomy">Anatomy</a>
+      <a href="#install">Install</a>
+      <a href="#corpus">Corpus</a>
+      <a href="#author">Author</a>
+      <a href="#rights">Rights</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Mesen2 MCP 0.6.0 &middot; Library 0.1.0</p>
+        <h1>Give the agent <em>the manual</em>, not a guess.</h1>
+        <p class="lead">
+          Game-context packs for one specific game: how its systems work, where things are,
+          what the numbers mean, how to probe them, and what differs by region. Enough grounding
+          that an agent stops walking into a wall for 20,000 frames.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/releases/tag/library-v0.1.0">
+            Get library 0.1.0 <span aria-hidden="true">&darr;</span>
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor">
+            Browse the repository <span aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+        <p class="hero-note">Content CC BY-SA 4.0. Code GPL-3.0. No ROMs, guides, or saves are included.</p>
+
+        <div class="stats">
+          <div><strong>2</strong><span>Certified packs</span></div>
+          <div><strong>14</strong><span>Reference pages</span></div>
+          <div><strong>31</strong><span>Public sources</span></div>
+          <div><strong>7</strong><span>Domains per pack</span></div>
+        </div>
+      </div>
+
+      <aside class="dossier" aria-label="Example pack card">
+        <header><span>Pack dossier</span><span>Field tested</span></header>
+        <h2>Final Fantasy Legend</h2>
+        <p class="plat">Game Boy &middot; pack 0.2.1</p>
+        <ul>
+          <li><span>World and route</span><span>verified</span></li>
+          <li><span>Battle records</span><span>verified</span></li>
+          <li><span>Monster HP ladder</span><span>verified</span></li>
+          <li><span>Encounter areas</span><span>verified</span></li>
+          <li><span>Harness addresses</span><span>verified</span></li>
+          <li><span>Regional variants</span><span>partial</span></li>
+        </ul>
+        <p class="stamp">Certified 97 / 100</p>
+      </aside>
+    </div>
+  </div>
+
+  <section id="not">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">01 &middot; What this is</p>
+        <h2>A dossier, not a hint line.</h2>
+        <p>
+          There are no spoiler gates and no "are you sure you want to know" prompts. The pack describes
+          the game the way a technician needs it: systems, addresses, tables, maps, and the evidence
+          behind each claim. Read what the task needs.
+        </p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Grounded claims</h3>
+          <p>Every assertion is tagged <code>[V]</code> verified in the emulator, <code>[D]</code> derived
+             from the ROM or data tables, or <code>[U]</code> unverified. You can see which is which.</p>
+        </div>
+        <div class="card">
+          <h3>Regional reality</h3>
+          <p>Japanese sources are treated as first-class evidence, because regional releases hide
+             differences that the English version quietly papers over.</p>
+        </div>
+        <div class="card">
+          <h3>Honest coverage</h3>
+          <p>Coverage is declared per domain and the gaps are listed. A pack says "route beyond this
+             town is an outline" instead of implying it is finished.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packs">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">02 &middot; The packs</p>
+        <h2>Two certified, more welcome.</h2>
+        <p>
+          A pack is aimed at one game and one job: give an agent enough context to play, test,
+          reverse-engineer, patch, or localize it without re-deriving the basics. Certification needs
+          a recorded field test and a rubric score, not just prose.
+        </p>
+      </div>
+
+      <div class="packs">
+        <article class="pack">
+          <header>
+            <div>
+              <h3>Final Fantasy Legend</h3>
+              <p class="meta">Game Boy &middot; pack 0.2.1</p>
+            </div>
+            <p class="score">97<small>/ 100</small></p>
+          </header>
+          <p>
+            Route and map topology, battle menu behavior, character and monster records, the HP
+            ladder, encounter areas, and a working Lua kit with recipes for harvesting and
+            reading records.
+          </p>
+          <dl>
+            <dt>Coverage</dt><dd>5 of 7 domains verified</dd>
+            <dt>Pages</dt><dd>7 references</dd>
+            <dt>Sources</dt><dd>16 public</dd>
+            <dt>Tested on</dt><dd>Mesen2 MCP 0.6.0</dd>
+          </dl>
+          <p class="links">
+            <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/packs/gb/final-fantasy-legend/README.md">Pack README</a>
+            <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/packs/gb/final-fantasy-legend/CERTIFICATION.md">Certification</a>
+          </p>
+        </article>
+
+        <article class="pack">
+          <header>
+            <div>
+              <h3>Secret of the Stars</h3>
+              <p class="meta">SNES &middot; pack 0.2.3</p>
+            </div>
+            <p class="score">91<small>/ 100</small></p>
+          </header>
+          <p>
+            World topology, party and battle systems, starter tables for characters, enemies, items,
+            spells and shops, verified core RAM probes including the player coordinate, and the
+            Japanese release differences.
+          </p>
+          <dl>
+            <dt>Coverage</dt><dd>1 of 7 domains verified</dd>
+            <dt>Pages</dt><dd>7 references</dd>
+            <dt>Sources</dt><dd>15 public</dd>
+            <dt>Tested on</dt><dd>Mesen2 MCP 0.6.0</dd>
+          </dl>
+          <p class="links">
+            <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/packs/snes/secret-of-the-stars/README.md">Pack README</a>
+            <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/packs/snes/secret-of-the-stars/CERTIFICATION.md">Certification</a>
+          </p>
+        </article>
+      </div>
+
+      <div class="callout">
+        <p><strong>The route beyond Brasca is still an outline.</strong> The Secret of the Stars pack is
+           certified because its claims are tagged and its core probes were measured in the emulator,
+           not because the whole game has been walked. The pack says so on its first page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="anatomy">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">03 &middot; Anatomy</p>
+        <h2>What is inside a pack.</h2>
+        <p>The same six pieces in every pack, so an agent knows where to look before it knows the game.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3><code>SKILL.md</code></h3>
+          <p>The entry point: what the pack covers, which files answer which question, and the
+             minimal reading order for a task.</p>
+        </div>
+        <div class="card">
+          <h3>Seven references</h3>
+          <p>Overview, world, systems, data, harness, edge cases, and regional variants. Each page
+             names the question it answers.</p>
+        </div>
+        <div class="card">
+          <h3>Data with provenance</h3>
+          <p>CSV tables for characters, enemies, items, spells, shops, maps, and encounters, each
+             hashed in <code>provenance.json</code>.</p>
+        </div>
+        <div class="card">
+          <h3>Lua kit</h3>
+          <p>Helpers and ready-made recipes so a probe is a tool call, not a fresh scripting
+             project.</p>
+        </div>
+        <div class="card">
+          <h3>Field test</h3>
+          <p>A recorded run against a named server version, with savestates and screenshots kept as
+             evidence.</p>
+        </div>
+        <div class="card">
+          <h3>Source manifests</h3>
+          <p>A public manifest credits titles, authors, and licenses. A local-only manifest holds
+             paths and hashes for material that cannot ship, and stays gitignored.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">04 &middot; Install</p>
+        <h2>Three steps, no build.</h2>
+        <p>
+          The library is additive. It does not touch the emulator or the MCP server, so you can drop
+          it into an existing Mesen2 MCP checkout.
+        </p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div>
+            <h3>Get the server</h3>
+            <p>Download the zip for your platform from the releases page and extract it somewhere
+               permanent. It needs the .NET 8 runtime; Linux and macOS also need SDL2.</p>
+            <pre><code><span class="c"># Windows example</span>
+C:\Tools\mesen2-mcp\MesenMcpHost.dll</code></pre>
+          </div>
+        </div>
+
+        <div class="step">
+          <div>
+            <h3>Install a pack as a skill</h3>
+            <p>From the repository root, the installer copies public content only and prints the Lua
+               library path for the next step.</p>
+            <pre><code>python library/tools/install_pack.py --pack gb/final-fantasy-legend --target .agents/skills</code></pre>
+            <p style="margin-top:.6rem">Or take a pack bundle from the release and extract it straight
+               into <code>.agents/skills/&lt;skill-name&gt;/</code>.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div>
+            <h3>Point the client at the Lua kit</h3>
+            <p>Add the printed <code>--mcp-lib-dir</code> value to the server arguments, then restart
+               the client so it reloads the skill list.</p>
+            <pre><code>{
+  "mcpServers": {
+    "mesen2-mcp": {
+      "command": "dotnet",
+      "args": [
+        "C:/Tools/mesen2-mcp/MesenMcpHost.dll",
+        "--mcp-lib-dir=C:/Tools/mesen2-mcp/.agents/skills/ffl-gameplay/lua/lib"
+      ]
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="corpus">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">05 &middot; The local corpus</p>
+        <h2>The shelf ships empty. The books are yours.</h2>
+        <p>
+          Guides, manuals, maps, and saves are not distributed and never linked to. If you already own
+          reference material, drop it into the corpus and the agent can query it directly instead of
+          scraping the web.
+        </p>
+      </div>
+
+      <div class="split">
+        <div>
+          <ul class="clean">
+            <li><strong>Two layers.</strong> The public pack works with no corpus at all. The corpus
+                is the second layer: your material, indexed locally.</li>
+            <li><strong>Offline by design.</strong> Ingest and query never touch the network. The index
+                is SQLite FTS5 and stays gitignored.</li>
+            <li><strong>Text versus facts.</strong> Facts learned from a source may enter a pack with
+                credit. The source text itself never does.</li>
+            <li><strong>Japanese in, Japanese out.</strong> Text decodes through UTF-8, CP932, and
+                EUC-JP, with a trigram index so a query like the one below still finds the page.</li>
+          </ul>
+        </div>
+        <div>
+          <pre><code><span class="c"># create the folders for one game</span>
+python library/tools/scaffold_corpus.py \
+  --platform snes --game secret-of-the-stars
+
+<span class="c"># index what is there</span>
+python library/tools/ingest_corpus.py \
+  --corpus library/corpus --game secret-of-the-stars
+
+<span class="c"># ask it something</span>
+python library/tools/query_corpus.py "town data" \
+  --game secret-of-the-stars
+python library/tools/query_corpus.py "&#x9b54;&#x738b;" \
+  --game secret-of-the-stars</code></pre>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p><strong>The rules are short.</strong> Do not commit the corpus or its index. Do not add
+           download links, scrapers, or mirrors of copyrighted material. A source that forbids
+           redistribution stays local-only, recorded by title, author, and license in a manifest that
+           is also gitignored.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="author">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">06 &middot; Authoring</p>
+        <h2>An Academy, not a style guide.</h2>
+        <p>
+          A master skill walks an agent through building a pack: identify the edition, inventory the
+          material, triage sources, read the game before the guides, verify in Mesen, write the pack,
+          then review it against a 100-point rubric.
+        </p>
+      </div>
+
+      <div class="split">
+        <div>
+          <ul class="clean">
+            <li><strong>Seven lessons</strong> that end with a filled template, not a reading list.</li>
+            <li><strong>A 100-point rubric</strong> over coverage, evidence, reproducibility, rights,
+                and clarity. Certification needs 80 or more, no category below 60 percent, and zero
+                rights failures.</li>
+            <li><strong>Templates and checklists</strong> for intake, data verification, and review.</li>
+            <li><strong>Two worked examples</strong> that pass the rubric, both shipped in the
+                authoring bundle.</li>
+          </ul>
+          <p style="margin-top:1.2rem">
+            <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/academy/README.md">Read the Academy</a>
+            &middot;
+            <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/academy/rubric.md">See the rubric</a>
+          </p>
+        </div>
+        <div>
+          <pre><code><span class="c"># what an author runs before opening a PR</span>
+python library/tools/check_tree.py
+python library/tools/validate_pack.py --all --template
+python library/tools/build_catalog.py --check
+python -m unittest discover -s library/tools/tests</code></pre>
+          <p style="margin-top:.8rem; font-size:.88rem; color:var(--ink-soft)">
+            A pack that fails validation does not merge. A pack without a field test does not certify.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rights">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">07 &middot; Rights</p>
+        <h2>What is deliberately missing.</h2>
+        <p>
+          The repository contains original prose, data compiled from observation and public
+          references, and code. It does not contain, link to, or help you obtain the games or the
+          guides about them.
+        </p>
+      </div>
+
+      <div class="rights-grid">
+        <div class="card">
+          <h3><span class="no">Not included</span></h3>
+          <p>ROMs, guide text, manual scans, map renders, savestates, patches, or ripped art. No
+             download links, no mirrors, no scrapers.</p>
+        </div>
+        <div class="card">
+          <h3>Licensing</h3>
+          <p>Pack prose, data compilations, schematics, and variants are CC BY-SA 4.0. Tools and Lua
+             code are GPL-3.0. Source metadata keeps each source's own license.</p>
+        </div>
+        <div class="card">
+          <h3>Credit</h3>
+          <p>Every public source is credited by title, author, and license in the pack's manifest.
+             Local-only sources are credited the same way, without paths or links.</p>
+        </div>
+        <div class="card">
+          <h3>Takedown</h3>
+          <p>If something should not be here, open an issue or follow the takedown policy. Content is
+             removed first and discussed second.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p><strong>Use only ROMs you are entitled to use.</strong> The emulator and the server ship no
+           game data, and neither does the library.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p style="font-family:var(--serif); font-size:1.05rem; color:var(--ink); margin-bottom:.4rem">
+        Counselor Library 0.1.0
+      </p>
+      <p>
+        Built on <a href="https://github.com/Azarem/mesen2-mcp">Azarem's mesen2-mcp</a> and
+        <a href="https://github.com/SourMesen/Mesen2">Mesen2</a>. The server is unchanged; the library
+        is additive and can be copied into any Mesen2 MCP checkout.
+      </p>
+      <p class="colophon">
+        This page is static, self-contained, and served from <code>docs/</code>. Last updated
+        November 2026.
+      </p>
+    </div>
+    <div>
+      <nav aria-label="Project links">
+        <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor">Repository</a>
+        <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/releases">Releases</a>
+        <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/issues">Issues</a>
+        <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/discussions">Discussions</a>
+        <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/INSTALL.md">Install notes</a>
+        <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/LICENSING.md">Licensing</a>
+        <a href="https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/TAKEDOWN.md">Takedown</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
