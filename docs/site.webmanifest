@@ -1,0 +1,25 @@
+{
+  "name": "Counselor Library - game context packs for Mesen2 MCP",
+  "short_name": "Counselor",
+  "description": "Game-context packs for Mesen2 MCP: verified systems, maps, data tables, RAM probes, and regional differences so an agent can play, test, reverse-engineer, or patch a specific game without guessing.",
+  "lang": "en",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#12141a",
+  "theme_color": "#7c2d2d",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
