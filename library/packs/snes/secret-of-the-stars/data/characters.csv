@@ -1,0 +1,17 @@
+id,name,class,level,initial_exp,later_exp,current_hp
+0,Ray,None,1,0,12,32
+1,Tina,Banalet,1,0,14,30
+2,Cody,None,4,82,72,53
+3,Leona,Banalet,4,102,90,54
+4,Dan,Wiseman,10,1093,,82
+5,David,Warrior,1,16,,34
+6,Ryu,Ninja,4,90,,53
+7,Ben,Priest,4,84,,48
+8,Andy,Fighter,6,202,,74
+9,Arthur,Witch,8,485,,64
+A,Evelyn,Thief,8,334,,77
+B,Jubei,Samurai,8,620,,77
+C,Murray,Wizard,10,1093,,82
+D,Shark,Warrior,8,416,,87
+E,Kathy,Archer,10,559,,91
+F,Beth,Doctor,10,952,,93

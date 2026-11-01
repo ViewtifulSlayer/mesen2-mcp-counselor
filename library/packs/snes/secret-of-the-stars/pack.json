@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "schemaVersion": 1,
+  "id": "secret-of-the-stars",
+  "title": "Secret of the Stars",
+  "platform": "snes",
+  "region": "US",
+  "packVersion": "0.2.3",
+  "status": "certified",
+  "license": "CC-BY-SA-4.0",
+  "rom": {
+    "title": "Tecmo Secret of the Stars (USA)",
+    "size": 1572864,
+    "sha1": "958a0a835e2e39f382cb37a99098a3cdd4812cf7",
+    "mapper": "LoROM"
+  },
+  "skill": {
+    "name": "sots-gameplay",
+    "entry": "SKILL.md"
+  },
+  "coverage": {
+    "overview": "partial",
+    "world": "partial",
+    "systems": "partial",
+    "data": "partial",
+    "harness": "verified",
+    "edgeCases": "partial",
+    "variants": "partial"
+  },
+  "tested": {
+    "mesen2Mcp": ["0.6.0"]
+  },
+  "requires": {
+    "tools": [
+      "load_rom",
+      "get_rom_info",
+      "read_memory",
+      "run_recipe",
+      "save_state_file",
+      "load_state_file"
+    ]
+  },
+  "sources": {
+    "public": "sources/manifest.public.json",
+    "local": "sources/manifest.local.json"
+  },
+  "corpus": {
+    "platform": "snes",
+    "game": "secret-of-the-stars"
+  },
+  "data": [
+    "data/characters.csv",
+    "data/enemies-starter.csv",
+    "data/items-starter.csv",
+    "data/spells-starter.csv",
+    "data/shops-starter.csv",
+    "data/map-ids-starter.csv",
+    "data/encounters-starter.csv"
+  ],
+  "lua": {
+    "libDir": "lua/lib",
+    "recipes": ["read-state", "probe-map"]
+  },
+  "tests": ["tests/field-test.md"]
+}

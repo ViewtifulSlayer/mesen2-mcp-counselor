@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" role="img" aria-labelledby="title desc">
+  <title id="title">Secret of the Stars route schematic</title>
+  <desc id="desc">Original diagram of the documented route stages, from Heart Island through Likado, Jeep Volcano, Beegees, Old Hill, Decatas, the four shrines, Kustera, and Booth Castle.</desc>
+  <style>
+    .bg { fill: #f6f2e8; }
+    .solid { fill: #ffffff; stroke: #2f4b3a; stroke-width: 3; }
+    .dashed { fill: #f1ecdc; stroke: #8b7b5e; stroke-width: 3; stroke-dasharray: 8 6; }
+    .jp { fill: #eef3f7; stroke: #486b82; stroke-width: 3; }
+    .label { font: 600 17px monospace; fill: #22301f; }
+    .small { font: 13px monospace; fill: #46523f; }
+    .note { font: 13px monospace; fill: #6b4b2a; }
+    .route { stroke: #b35a2a; stroke-width: 4; fill: none; }
+    .open { stroke: #8b7b5e; stroke-width: 3; fill: none; stroke-dasharray: 8 6; }
+  </style>
+  <rect class="bg" x="0" y="0" width="980" height="620"/>
+  <text class="label" x="28" y="38">Secret of the Stars - documented route outline (original schematic)</text>
+  <text class="small" x="28" y="60">Solid: documented stage. Dashed: unverified route or gate. Not a map render.</text>
+
+  <rect class="solid" x="60" y="110" width="170" height="76" rx="8"/>
+  <text class="label" x="80" y="142">Heart Island</text>
+  <text class="small" x="80" y="166">Ray's House / start</text>
+
+  <rect class="solid" x="300" y="110" width="150" height="76" rx="8"/>
+  <text class="label" x="322" y="142">Likado</text>
+  <text class="small" x="322" y="166">shops / David</text>
+
+  <rect class="solid" x="520" y="110" width="170" height="76" rx="8"/>
+  <text class="label" x="540" y="142">Jeep Volcano</text>
+  <text class="small" x="540" y="166">first dungeon</text>
+
+  <rect class="solid" x="760" y="110" width="160" height="76" rx="8"/>
+  <text class="label" x="780" y="142">Beegees</text>
+  <text class="small" x="780" y="166">town / tunnel</text>
+
+  <rect class="dashed" x="760" y="250" width="160" height="76" rx="8"/>
+  <text class="label" x="780" y="282">Old Hill</text>
+  <text class="small" x="780" y="306">hospital / lab</text>
+
+  <rect class="dashed" x="520" y="250" width="170" height="76" rx="8"/>
+  <text class="label" x="540" y="282">Decatas</text>
+  <text class="small" x="540" y="306">shops / rocket</text>
+
+  <rect class="jp" x="300" y="250" width="150" height="76" rx="8"/>
+  <text class="label" x="322" y="282">Four shrines</text>
+  <text class="small" x="322" y="306">Fire / Water / Wind / Earth</text>
+
+  <rect class="dashed" x="60" y="250" width="170" height="76" rx="8"/>
+  <text class="label" x="80" y="282">Kustera</text>
+  <text class="small" x="80" y="306">colony party</text>
+
+  <rect class="dashed" x="300" y="430" width="170" height="76" rx="8"/>
+  <text class="label" x="322" y="462">Booth Castle</text>
+  <text class="small" x="322" y="486">late-game gate</text>
+
+  <rect class="dashed" x="600" y="430" width="180" height="76" rx="8"/>
+  <text class="label" x="620" y="462">Search for Dr. Ash</text>
+  <text class="small" x="620" y="486">mid/late route</text>
+
+  <path class="route" d="M230 148 L300 148"/>
+  <path class="route" d="M450 148 L520 148"/>
+  <path class="route" d="M690 148 L760 148"/>
+  <path class="route" d="M840 186 L840 250"/>
+  <path class="open" d="M760 288 L690 288"/>
+  <path class="open" d="M520 288 L450 288"/>
+  <path class="open" d="M300 288 L230 288"/>
+  <path class="open" d="M375 326 L375 430"/>
+  <path class="open" d="M470 468 L600 468"/>
+
+  <text class="note" x="60" y="560">Route stages are from the local guides. Map ids and party slots are from the local technical document.</text>
+  <text class="note" x="60" y="582">Verify a stage with the map id at $040E and the encounter id at $043C before treating it as walked.</text>
+</svg>

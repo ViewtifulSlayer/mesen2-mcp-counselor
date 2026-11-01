@@ -1,0 +1,50 @@
+{
+  "version": "0.1.0",
+  "bundles": {
+    "library": {
+      "include": ["library/**"],
+      "exclude": ["library/tools/tests/**"]
+    },
+    "authoring": {
+      "include": [
+        "library/academy/**",
+        "library/schemas/**",
+        "library/tools/**",
+        "library/permissions/**",
+        "library/packs/gb/final-fantasy-legend/**",
+        "library/packs/snes/secret-of-the-stars/**",
+        "library/corpus/README.md",
+        "library/README.md",
+        "library/INSTALL.md",
+        "library/LICENSE",
+        "library/LICENSING.md",
+        "library/NOTICE.md",
+        "library/VERSION"
+      ],
+      "exclude": ["library/tools/tests/**"]
+    },
+    "corpus": {
+      "include": [
+        "library/tools/_common.py",
+        "library/tools/scaffold_corpus.py",
+        "library/tools/ingest_corpus.py",
+        "library/tools/query_corpus.py",
+        "library/tools/requirements.txt",
+        "library/schemas/**",
+        "library/corpus/README.md",
+        "library/INSTALL.md",
+        "library/LICENSE",
+        "library/VERSION"
+      ],
+      "exclude": []
+    },
+    "pack:final-fantasy-legend": {
+      "include": ["library/packs/gb/final-fantasy-legend/**"],
+      "exclude": []
+    },
+    "pack:secret-of-the-stars": {
+      "include": ["library/packs/snes/secret-of-the-stars/**"],
+      "exclude": []
+    }
+  }
+}

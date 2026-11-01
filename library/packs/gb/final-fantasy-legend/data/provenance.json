@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "tables": [
+    {
+      "file": "data/hp-ladder.csv",
+      "origin": "rom",
+      "source": "hpvalues, file $1B254, 32 x u16 little-endian",
+      "generator": "manual transcription from the verified FFL project table",
+      "sha256": "2af282851d1b2fc3308cd68a870d9dda5f47dc955a779a58036bfdbf61b3440f",
+      "verifiedOn": "2026-11-01",
+      "notes": "Indices 22 and 23 are out of order (250, 600); do not assume monotonicity."
+    },
+    {
+      "file": "data/monsters-confirmed.csv",
+      "origin": "rom",
+      "source": "crtype, file $1AAE8, 200 x 9 bytes; stats cross-checked against the Monster Inventory FAQ and live battles",
+      "generator": "manual transcription from the verified FFL project tables",
+      "sha256": "d081ffb5688f6354164048b6a9f2a8407c63ec8180e244bf656fa98e75bb939f",
+      "verifiedOn": "2026-11-01",
+      "notes": "Only confirmed rows are included. The full 200-row bestiary stays in the local source."
+    },
+    {
+      "file": "data/encounters-world1.csv",
+      "origin": "rom",
+      "source": "encounter entries, file $1A868, 5 bytes each; ids $10-$17",
+      "generator": "manual transcription from the verified FFL project table",
+      "sha256": "f8b187885f05dc92f92daab23b0c6e93995ef8e9f5834e57b26fb21d08d6d170",
+      "verifiedOn": "2026-11-01",
+      "notes": "Which of the three monster slots spawns was not determined."
+    }
+  ]
+}

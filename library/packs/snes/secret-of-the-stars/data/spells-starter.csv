@@ -1,0 +1,13 @@
+id,name,targeting,mp,power
+0,Fire,0F,02,08
+1,Freeze,0F,02,08
+2,Storm,0F,03,08
+3,Bolt,0F,04,0A
+4,Bomb,4F,05,0A
+5,Coma,07,03,10
+6,Vanish,05,04,80
+7,Land,C0,08,03
+8,Mute,08,03,02
+9,Antpwr,0F,04,03
+A,Antspl,0F,00,02
+B,Evade,0F,04,02

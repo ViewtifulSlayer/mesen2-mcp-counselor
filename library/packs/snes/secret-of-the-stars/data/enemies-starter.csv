@@ -1,0 +1,17 @@
+id,name,hp,mp,attack,defense,speed,species,hit_count
+00,Slime,10,0,9,7,3,Slime,1
+01,Red Slime,11,0,10,8,4,Slime,1
+02,Bat,12,0,11,9,5,Animal,1
+03,Hedgehog,14,0,12,10,6,Animal,1
+04,Pig Man,16,0,14,11,8,Pigling,1
+05,Quill,18,0,13,13,10,Animal,1
+06,Cat Boo,36,0,17,15,14,Animal,1
+07,DR.Gari,120,0,24,28,15,Human,1
+08,Stun Rat,20,0,16,14,13,Animal,1
+09,Goblin,31,0,22,16,9,Pigling,1
+0A,Bad Slime,11,0,11,8,6,Slime,1
+0B,BadMan,40,0,27,28,13,Human,1
+0C,Ghost,2,0,25,65535,8,Undead,1
+0D,Bone,32,0,26,16,11,Undead,1
+0E,Zombi,33,0,25,18,8,Undead,1
+0F,Holo Bird,40,0,30,24,20,Animal,1

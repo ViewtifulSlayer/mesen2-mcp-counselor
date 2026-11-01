@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/library/schemas/source-public.schema.json",
+  "title": "Public source manifest",
+  "type": "object",
+  "required": ["schemaVersion", "sources"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "author", "license", "redistribution", "covers", "region", "language"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?$" },
+          "title": { "type": "string", "minLength": 1 },
+          "author": { "type": "string", "minLength": 1 },
+          "license": { "type": "string", "minLength": 1 },
+          "redistribution": { "enum": ["repo-safe", "local-only", "permissioned"] },
+          "covers": { "type": "array", "items": { "type": "string" } },
+          "region": { "type": "string" },
+          "language": { "type": "string" },
+          "note": { "type": "string" },
+          "url": { "type": "string" },
+          "permissionId": { "type": "string" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "redistribution": { "const": "local-only" } }, "required": ["redistribution"] },
+            "then": {
+              "not": {
+                "anyOf": [
+                  { "required": ["url"] },
+                  { "required": ["path"] },
+                  { "required": ["sha256"] },
+                  { "required": ["bytes"] },
+                  { "required": ["retrieved"] },
+                  { "required": ["pages"] },
+                  { "required": ["headings"] }
+                ]
+              }
+            }
+          },
+          {
+            "if": { "properties": { "redistribution": { "const": "permissioned" } }, "required": ["redistribution"] },
+            "then": { "required": ["permissionId"] }
+          }
+        ]
+      }
+    }
+  }
+}

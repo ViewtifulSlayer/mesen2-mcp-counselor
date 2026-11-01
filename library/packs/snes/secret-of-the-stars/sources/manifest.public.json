@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "landmine-doc",
+      "title": "Secret of the Stars technical data (Google doc by Landmine36)",
+      "author": "Landmine36",
+      "license": "unknown",
+      "redistribution": "local-only",
+      "covers": ["systems", "data", "harness", "edgeCases"],
+      "region": "US",
+      "language": "en",
+      "note": "35 CSVs plus HTML notes; facts were re-derived, not copied."
+    },
+    {
+      "id": "guide-darth-ragnarok",
+      "title": "Secret of the Stars Guides and Walkthrough by Darth Ragnarok",
+      "author": "Darth Ragnarok",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["overview", "world", "systems"],
+      "region": "US",
+      "language": "en",
+      "note": "Route outline and early-game context; no text included."
+    },
+    {
+      "id": "guide-mandrews",
+      "title": "Secret of the Stars Guides and Walkthrough by MAndrews",
+      "author": "MAndrews",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["world"],
+      "region": "US",
+      "language": "en",
+      "note": "Second route opinion; no text included."
+    },
+    {
+      "id": "guide-schalaay",
+      "title": "Secret of the Stars Guides and Walkthrough by SCHALAAY",
+      "author": "SCHALAAY",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["world", "systems"],
+      "region": "US",
+      "language": "en",
+      "note": "Shops and route cross-check; no text included."
+    },
+    {
+      "id": "boss-cvagts",
+      "title": "Secret of the Stars Boss Guide by CVagts",
+      "author": "CVagts",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["data"],
+      "region": "US",
+      "language": "en",
+      "note": "Boss context; no text included."
+    },
+    {
+      "id": "patch-dslevantine",
+      "title": "Secret of the Stars Pro Action Replay Codes by DSLevantine",
+      "author": "DSLevantine",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["harness", "edgeCases"],
+      "region": "US",
+      "language": "en",
+      "note": "Historical patch codes; not reproduced or applied."
+    },
+    {
+      "id": "patch-ferrel",
+      "title": "Secret of the Stars Pro Action Replay Codes by Ferrel",
+      "author": "Ferrel",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["harness", "edgeCases"],
+      "region": "US",
+      "language": "en",
+      "note": "Historical patch codes; not reproduced or applied."
+    },
+    {
+      "id": "rpgclassics-shrine",
+      "title": "RPGClassics Secret of the Stars shrine",
+      "author": "RPGClassics contributors",
+      "license": "CC-BY-NC-SA (unversioned)",
+      "redistribution": "local-only",
+      "covers": ["overview", "world", "systems", "data"],
+      "region": "US",
+      "language": "en",
+      "note": "Fan shrine; NC license. Facts consulted, no text included."
+    },
+    {
+      "id": "retromaggedon",
+      "title": "Tecmo Secret of the Stars walkthrough by RetroMaggedon",
+      "author": "RetroMaggedon",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["world"],
+      "region": "US",
+      "language": "en",
+      "note": "Route cross-check; no text included."
+    },
+    {
+      "id": "jp-guide",
+      "title": "Aqutallion Japanese guide (town, dungeon, equipment, magic, diary)",
+      "author": "unknown",
+      "license": "unknown",
+      "redistribution": "local-only",
+      "covers": ["data", "variants"],
+      "region": "JP",
+      "language": "ja",
+      "note": "17 Shift_JIS pages; item-name pairs and regional facts only."
+    },
+    {
+      "id": "maps-sots",
+      "title": "Secret of the Stars map set",
+      "author": "unknown",
+      "license": "unknown",
+      "redistribution": "local-only",
+      "covers": ["world"],
+      "region": "US",
+      "language": "en",
+      "note": "137 rendered area maps; not included."
+    },
+    {
+      "id": "us-manual",
+      "title": "Secret of the Stars USA manual",
+      "author": "Tecmo",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["overview", "systems"],
+      "region": "US",
+      "language": "en",
+      "note": "Scanned pages; not included."
+    },
+    {
+      "id": "jp-manual",
+      "title": "Aqutallion Japanese manual",
+      "author": "Tecmo",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["overview", "variants"],
+      "region": "JP",
+      "language": "ja",
+      "note": "Scanned pages; not included."
+    },
+    {
+      "id": "rom-sots-usa",
+      "title": "Tecmo Secret of the Stars (USA) ROM",
+      "author": "Tecmo",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["overview", "data", "harness"],
+      "region": "US",
+      "language": "en",
+      "note": "User-supplied ROM; SHA-1 is recorded in pack.json. Never committed."
+    },
+    {
+      "id": "rom-aqutallion-jp",
+      "title": "Aqutallion (Japan) ROM",
+      "author": "Tecmo",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["variants"],
+      "region": "JP",
+      "language": "ja",
+      "note": "User-supplied JP ROM; SHA-1 is recorded in variants. Never committed."
+    }
+  ]
+}

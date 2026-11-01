@@ -1,0 +1,13 @@
+Test Game - Sample Guide (original fixture text)
+
+The airship lands east of the starting town. From the landing field, walk west
+until the bridge appears.
+
+# Getting started
+
+Talk to the elder in the first house. He gives you the ferry pass.
+
+# The northern tower
+
+The tower gate opens only after the bridge is repaired. Inside, the first floor
+has two staircases; the west one leads to the observatory.

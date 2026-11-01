@@ -1,0 +1,76 @@
+name: Source intake
+description: Offer a source you own or can license for a pack.
+title: "[Source] <title> for <pack>"
+labels: ["library", "source-intake"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not attach the file. Describe it. If the source is local-only, its
+        path and hash belong in the gitignored local manifest, not here.
+  - type: input
+    id: pack
+    attributes:
+      label: Pack
+      placeholder: snes/secret-of-the-stars
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Source title
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author or rights holder
+    validations:
+      required: true
+  - type: dropdown
+    id: license
+    attributes:
+      label: License or permission
+      options:
+        - CC0 or public domain
+        - CC BY
+        - CC BY-SA
+        - CC BY-NC or CC BY-NC-SA (non-commercial; local-only)
+        - All rights reserved
+        - Written permission from the rights holder
+        - Unknown
+    validations:
+      required: true
+  - type: dropdown
+    id: redistribution
+    attributes:
+      label: Redistribution
+      options:
+        - repo-safe (the license allows inclusion)
+        - permissioned (written permission; a record is required)
+        - local-only (credit only; no content in the repository)
+    validations:
+      required: true
+  - type: textarea
+    id: covers
+    attributes:
+      label: What it covers
+      description: Systems, route, maps, tables, regional differences, or a specific gap.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: How the facts can be checked
+      description: The ROM, a save state, a specific screen, or a second source.
+    validations:
+      required: false
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Confirmation
+      options:
+        - label: I am not attaching the source or any copyrighted file to this issue.
+          required: true
+        - label: I have the right to offer this source for the stated use, or I am reporting a source I own for local-only use.
+          required: true

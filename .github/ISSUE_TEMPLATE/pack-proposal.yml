@@ -1,0 +1,69 @@
+name: Pack proposal
+description: Propose a new game pack for the Counselor Library.
+title: "[Pack] <game> (<platform>, <region>)"
+labels: ["library", "pack-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Read `library/academy/SKILL.md` before filling this out. Do not attach
+        ROMs, guides, manuals, maps, saves, or screenshots of them.
+  - type: input
+    id: game
+    attributes:
+      label: Game title
+      placeholder: Final Fantasy Legend
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Game Boy
+        - Game Boy Color
+        - Game Boy Advance
+        - NES
+        - SNES
+        - Genesis
+        - Master System
+        - Game Gear
+        - PC Engine
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: region
+    attributes:
+      label: Region and release
+      description: The exact release the pack targets, plus any regional versions you can compare.
+      placeholder: USA, with a JP comparison
+    validations:
+      required: true
+  - type: textarea
+    id: purpose
+    attributes:
+      label: What task should the pack support?
+      description: Playing, testing, reverse engineering, patching, localization, or a mix.
+      placeholder: Reverse engineering the battle record layout, with enough route context to reach the first fights.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources you own
+      description: Title, author, license, and whether each is repo-safe or local-only. Do not paste source text or links to pirated material.
+      placeholder: One guide I own (all-rights-reserved, local-only); the ROM; my own RAM notes.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Rights and scope
+      options:
+        - label: I will not commit ROMs, saves, guide text, manuals, maps, or ripped art.
+          required: true
+        - label: I can run a field test in Mesen2 MCP, or I will say that the pack is unverified.
+          required: false
+        - label: I have read the academy workflow and the pack contract.
+          required: false

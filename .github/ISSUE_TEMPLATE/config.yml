@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Read the library guide first
+    url: https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/README.md
+    about: What a pack is, what the corpus is for, and what the repository will not host.
+  - name: Authoring workflow
+    url: https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/academy/SKILL.md
+    about: The master skill for building, verifying, and reviewing a pack.
+  - name: Rights reports
+    url: https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/blob/master/library/TAKEDOWN.md
+    about: How to report material you believe infringes your rights.

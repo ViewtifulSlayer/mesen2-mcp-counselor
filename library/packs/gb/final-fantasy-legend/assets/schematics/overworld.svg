@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Final Fantasy Legend early-route schematic</title>
+  <desc id="desc">Original diagram of Base Town, the east-wall bridge, the east-bank forest, the dead-end coastline, and the unreached Town of Hero area.</desc>
+  <style>
+    .bg { fill: #f7f4ea; }
+    .land { fill: #dfe8cf; stroke: #6d7d5a; stroke-width: 2; }
+    .water { fill: #cfe7ef; stroke: #5b8b9b; stroke-width: 2; }
+    .known { fill: #ffffff; stroke: #334a2f; stroke-width: 3; }
+    .unreached { fill: #f3efe2; stroke: #8a7d5f; stroke-width: 3; stroke-dasharray: 8 6; }
+    .label { font: 600 18px monospace; fill: #22301f; }
+    .small { font: 14px monospace; fill: #3d4b39; }
+    .note { font: 14px monospace; fill: #6b4b2a; }
+    .route { stroke: #b35a2a; stroke-width: 4; fill: none; }
+    .dead { stroke: #9b3d3d; stroke-width: 4; fill: none; stroke-dasharray: 10 7; }
+    .tick { stroke: #8a7d5f; stroke-width: 2; }
+  </style>
+  <rect class="bg" x="0" y="0" width="960" height="560"/>
+  <text class="label" x="30" y="40">Final Fantasy Legend - early route (original schematic)</text>
+  <text class="small" x="30" y="64">Not a tile map. Verified walk segments are solid; unreached areas are dashed.</text>
+
+  <path class="water" d="M620 90 C700 110 760 170 760 250 C760 340 690 420 610 450 L610 520 L520 520 L520 430 C560 400 580 350 580 290 C580 210 540 150 500 120 Z"/>
+  <path class="land" d="M80 120 L500 100 L540 180 L520 430 L120 470 L60 360 Z"/>
+  <path class="land" d="M620 110 L840 150 L860 360 L760 440 L620 430 L600 260 Z"/>
+
+  <rect class="known" x="130" y="300" width="150" height="90" rx="8"/>
+  <text class="label" x="152" y="338">Base Town</text>
+  <text class="small" x="152" y="362">party start</text>
+
+  <rect class="known" x="330" y="300" width="150" height="70" rx="8"/>
+  <text class="label" x="350" y="330">Bridge</text>
+  <text class="small" x="350" y="352">east wall</text>
+
+  <rect class="known" x="520" y="300" width="150" height="70" rx="8"/>
+  <text class="label" x="542" y="330">East bank</text>
+  <text class="small" x="542" y="352">one screen tall</text>
+
+  <rect class="unreached" x="690" y="230" width="150" height="90" rx="8"/>
+  <text class="label" x="708" y="262">Town of Hero</text>
+  <text class="small" x="708" y="286">not walked</text>
+
+  <rect class="unreached" x="690" y="370" width="150" height="70" rx="8"/>
+  <text class="label" x="708" y="400">Castle Shield</text>
+  <text class="small" x="708" y="422">not walked</text>
+
+  <rect class="unreached" x="520" y="430" width="150" height="60" rx="8"/>
+  <text class="label" x="540" y="458">Castle Sword</text>
+  <text class="small" x="540" y="478">not walked</text>
+
+  <path class="route" d="M280 340 L330 335"/>
+  <path class="route" d="M480 335 L520 335"/>
+  <path class="route" d="M670 335 C700 330 715 315 730 300"/>
+  <path class="route" d="M740 320 L745 370"/>
+
+  <path class="dead" d="M670 370 C720 390 760 420 800 450"/>
+  <text class="note" x="720" y="485">coastline: dead end</text>
+
+  <text class="note" x="80" y="500">Bridge rule: from the river corner, DOWN about four tiles, then RIGHT across the planks.</text>
+  <text class="note" x="80" y="522">A pinned SCY means the map is one screen tall; check east/west exits before pushing south.</text>
+</svg>

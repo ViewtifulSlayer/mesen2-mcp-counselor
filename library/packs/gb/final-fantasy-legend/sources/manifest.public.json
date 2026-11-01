@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "guide-levinmage",
+      "title": "Final Fantasy Legend Guide and Walkthrough by LevinMage, v1.3 (2002)",
+      "author": "LevinMage",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["world", "systems"],
+      "region": "US",
+      "language": "en",
+      "note": "Consulted for route order and systems; no text included."
+    },
+    {
+      "id": "guide-terrisus",
+      "title": "Final Fantasy Legend Guide and Walkthrough by TerrisUS, v1.0 (2004)",
+      "author": "TerrisUS",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["world"],
+      "region": "US",
+      "language": "en",
+      "note": "Second opinion on route order; no text included."
+    },
+    {
+      "id": "guide-walkerboh",
+      "title": "Final Fantasy Legend Guide and Walkthrough by WalkerBoh (2003)",
+      "author": "WalkerBoh",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["overview", "world"],
+      "region": "US",
+      "language": "en",
+      "note": "Consulted for early-game context; no text included."
+    },
+    {
+      "id": "guide-kao-megura",
+      "title": "Final Fantasy Legend Guide and Walkthrough by Kao_Megura, v0.1",
+      "author": "Kao_Megura",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["world"],
+      "region": "US",
+      "language": "en",
+      "note": "Consulted as a cross-check; no text included."
+    },
+    {
+      "id": "guide-walkerboh-boss",
+      "title": "Final Fantasy Legend Boss Guide by WalkerBoh (2003)",
+      "author": "WalkerBoh",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["data"],
+      "region": "US",
+      "language": "en",
+      "note": "Boss stats cross-check; no text included."
+    },
+    {
+      "id": "faq-yuandy",
+      "title": "Final Fantasy Legend Monster Inventory FAQ by yuandy",
+      "author": "yuandy",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["data"],
+      "region": "US",
+      "language": "en",
+      "note": "Appendix C is the file-order bestiary; facts cross-checked against the ROM."
+    },
+    {
+      "id": "faq-wonderllama-mutant",
+      "title": "Final Fantasy Legend Mutant FAQ by WonderLlama (2000)",
+      "author": "WonderLlama",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["systems"],
+      "region": "US",
+      "language": "en",
+      "note": "Mutant mechanics reference; no text included."
+    },
+    {
+      "id": "faq-wonderllama-human",
+      "title": "Final Fantasy Legend Human FAQ by WonderLlama (2000)",
+      "author": "WonderLlama",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["systems"],
+      "region": "US",
+      "language": "en",
+      "note": "Human mechanics reference; no text included."
+    },
+    {
+      "id": "faq-s-p-meat",
+      "title": "Final Fantasy Legend Meat Transformations FAQ by s-p",
+      "author": "s-p",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["systems"],
+      "region": "US",
+      "language": "en",
+      "note": "Meat mechanics reference; no text included."
+    },
+    {
+      "id": "faq-mafafu-savestate",
+      "title": "Final Fantasy Legend Save State Hacking Guide by mafafu",
+      "author": "mafafu",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["harness"],
+      "region": "US",
+      "language": "en",
+      "note": "Historical RAM-edit recipes; no text included."
+    },
+    {
+      "id": "faq-damageinc-scc",
+      "title": "Final Fantasy Legend Single Character Challenge FAQ by DamageInc",
+      "author": "DamageInc",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["systems"],
+      "region": "US",
+      "language": "en",
+      "note": "Mechanics cross-check; no text included."
+    },
+    {
+      "id": "faq-squaresoft",
+      "title": "Final Fantasy Legend FAQ by Squaresoft2K",
+      "author": "Squaresoft2K",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["overview"],
+      "region": "US",
+      "language": "en",
+      "note": "General reference; no text included."
+    },
+    {
+      "id": "faq-gouki-translation",
+      "title": "Final Fantasy Legend Translation Differences FAQ by Gouki_of_Borg",
+      "author": "Gouki_of_Borg",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["variants"],
+      "region": "US",
+      "language": "en",
+      "note": "Starting point for JP/US name differences; not a ROM comparison."
+    },
+    {
+      "id": "maps-terran-2012",
+      "title": "Final Fantasy Legend map sheets, compiled by Terran (2012)",
+      "author": "Terran",
+      "license": "unknown",
+      "redistribution": "local-only",
+      "covers": ["world"],
+      "region": "US",
+      "language": "en",
+      "note": "Stitched screen composites used for route planning; sheets are not included."
+    },
+    {
+      "id": "rom-ffl-usa",
+      "title": "Final Fantasy Legend, The (USA) ROM",
+      "author": "Square",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": ["overview", "systems", "data", "harness"],
+      "region": "US",
+      "language": "en",
+      "note": "User-supplied ROM; SHA-1 is recorded in pack.json. Never committed."
+    },
+    {
+      "id": "project-session-20261101",
+      "title": "FFL session 20261101-01: walk, records, HP derivation, harness",
+      "author": "Resonance7 project",
+      "license": "CC-BY-SA-4.0",
+      "redistribution": "local-only",
+      "covers": ["systems", "data", "harness", "edgeCases"],
+      "region": "US",
+      "language": "en",
+      "note": "The verified measurements behind this pack; the log is not shipped."
+    }
+  ]
+}

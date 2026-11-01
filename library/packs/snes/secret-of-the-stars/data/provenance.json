@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "tables": [
+    {
+      "file": "data/characters.csv",
+      "origin": "source",
+      "source": "Landmine36 technical document, Secret Of The Stars - Character Data.csv, rows 0-F",
+      "generator": "manual transcription of the starter columns",
+      "sha256": "b65a50cbb0641ef0d7932e0cdaa97040df545c969dce884c514a925dd3223f24",
+      "verifiedOn": "2026-11-01",
+      "notes": "Class, level, EXP, and starting HP; current HP is the table value, not a max."
+    },
+    {
+      "file": "data/enemies-starter.csv",
+      "origin": "source",
+      "source": "Landmine36 technical document, Secret Of The Stars - Enemy Data.csv, rows 00-0F",
+      "generator": "manual transcription of the first 16 rows",
+      "sha256": "af374c2c61d91ccee33a7b20360b1feb921d8b45bbc64e6b7f19d1e133841343",
+      "verifiedOn": "2026-11-01",
+      "notes": "Base stats; Ghost defense 65535 is the table value and needs a live check."
+    },
+    {
+      "file": "data/items-starter.csv",
+      "origin": "source",
+      "source": "Landmine36 technical document, Secret Of The Stars - Item Data.csv, first 20 rows",
+      "generator": "manual transcription of id, name, type, targeting, value",
+      "sha256": "0ab2c2786779369a8acfac5a8587e155810c7bb3be974c1b5f45bba77143e0e8",
+      "verifiedOn": "2026-11-01",
+      "notes": "Descriptions and pointer columns are omitted."
+    },
+    {
+      "file": "data/spells-starter.csv",
+      "origin": "source",
+      "source": "Landmine36 technical document, Secret Of The Stars - Spell Data.csv, first 12 rows",
+      "generator": "manual transcription of id, name, targeting, MP, power",
+      "sha256": "ab8d8bf44e822c75c33a5362aa59cb5089e06380dd1786540766740ff9760640",
+      "verifiedOn": "2026-11-01",
+      "notes": "Targeting and MP are hex strings from the table."
+    },
+    {
+      "file": "data/shops-starter.csv",
+      "origin": "source",
+      "source": "Landmine36 technical document, Secret Of The Stars - Shops.csv, first 12 rows",
+      "generator": "manual transcription of shop, count, item list",
+      "sha256": "1f1655d07e439154ab397c706e4172ff961351cd79131176460a9b463d8ba3fa",
+      "verifiedOn": "2026-11-01",
+      "notes": "Stock names preserve the game's short spellings."
+    },
+    {
+      "file": "data/map-ids-starter.csv",
+      "origin": "source",
+      "source": "Landmine36 technical document, Secret Of The Stars - Map ID's.csv, first 20 rows",
+      "generator": "manual transcription of id and map name",
+      "sha256": "b3a3f052db46227675d8baf43e30af523936175144ddb33723f60e49239a57ec",
+      "verifiedOn": "2026-11-01",
+      "notes": "The full table has 337 rows; this is the starter subset."
+    },
+    {
+      "file": "data/encounters-starter.csv",
+      "origin": "source",
+      "source": "Landmine36 technical document, Secret Of The Stars - Encounter Packs.csv, first 8 rows",
+      "generator": "manual transcription of id, pointer, unknown bytes, monsters",
+      "sha256": "1bcc21a5646546ff093a41e1a637f755b90eac52592434461bc6c8637d550bba",
+      "verifiedOn": "2026-11-01",
+      "notes": "The first eight entries are boss-like packs; the full table has 256 rows."
+    }
+  ]
+}

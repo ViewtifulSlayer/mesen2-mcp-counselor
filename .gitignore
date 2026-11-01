@@ -190,3 +190,13 @@ packages/*
 
 TestHelper/*
 UI/Dependencies.zip
+
+# Counselor Library: the user-supplied corpus, local source manifests, and build output.
+library/corpus/*
+!library/corpus/README.md
+library/packs/*/*/sources/manifest.local.json
+__pycache__/
+*.pyc
+library/tools/tests/tmp/
+dist/
+example_library/

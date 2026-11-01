@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/library/schemas/provenance.schema.json",
+  "title": "Data provenance",
+  "type": "object",
+  "required": ["schemaVersion", "tables"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "origin", "source", "generator", "sha256", "verifiedOn"],
+        "properties": {
+          "file": { "type": "string" },
+          "origin": { "enum": ["rom", "observation", "source", "manual"] },
+          "source": { "type": "string" },
+          "generator": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "verifiedOn": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

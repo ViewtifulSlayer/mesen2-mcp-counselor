@@ -1,0 +1,110 @@
+name: Counselor Library
+
+# Validates the additive library under library/ without building the emulator.
+#
+#  * Every push and pull request that touches the library validates the packs,
+#    regenerates the catalog in check mode, runs the tool tests, and inspects the
+#    release bundles.
+#  * Pushing a tag like library-v0.1.0 publishes the library bundles. The tag
+#    must match library/VERSION. This workflow never builds or releases the MCP
+#    server; upstream's build.yml owns that.
+
+on:
+  push:
+    branches: [master]
+    tags: ["library-v*"]
+    paths:
+      - "library/**"
+      - ".github/workflows/library.yml"
+      - "README.md"
+      - ".gitignore"
+  pull_request:
+    paths:
+      - "library/**"
+      - ".github/workflows/library.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: library-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  PYTHONIOENCODING: utf-8
+  PYTHONUTF8: "1"
+
+jobs:
+  validate:
+    name: Validate library
+    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tool dependencies
+        run: python -m pip install --disable-pip-version-check -r library/tools/requirements.txt
+
+      - name: Validate packs and template
+        run: python library/tools/validate_pack.py --all --template
+
+      - name: Check generated catalog
+        run: python library/tools/build_catalog.py --check
+
+      - name: Run tool tests
+        run: python -m unittest discover -s library/tools/tests -v
+
+      - name: Inspect release bundles
+        run: python library/tools/build_bundles.py --check
+
+  release:
+    name: Release library bundles
+    if: ${{ startsWith(github.ref, 'refs/tags/library-v') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tool dependencies
+        run: python -m pip install --disable-pip-version-check -r library/tools/requirements.txt
+
+      - name: Check the tag against library/VERSION
+        run: |
+          tag_version="${GITHUB_REF_NAME#library-v}"
+          file_version=$(tr -d '[:space:]' < library/VERSION)
+          echo "tag=$tag_version library/VERSION=$file_version"
+          if [ "$tag_version" != "$file_version" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match library/VERSION $file_version"
+            exit 1
+          fi
+
+      - name: Validate before publishing
+        run: |
+          python library/tools/validate_pack.py --all --template
+          python library/tools/build_catalog.py --check
+          python -m unittest discover -s library/tools/tests -v
+
+      - name: Build bundles
+        run: python library/tools/build_bundles.py --version "$GITHUB_REF_NAME" --out dist
+
+      - name: Publish release
+        run: |
+          version="${GITHUB_REF_NAME#library-v}"
+          gh release create "$GITHUB_REF_NAME" dist/*.zip dist/SHA256SUMS.txt \
+            --target "$GITHUB_SHA" \
+            --title "Counselor Library $version" \
+            --generate-notes

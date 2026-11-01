@@ -1,0 +1,13 @@
+Counselor Library content (pack prose, data compilations, schematics, variants,
+academy lessons) is licensed under the Creative Commons Attribution-ShareAlike
+4.0 International License.
+
+You may share and adapt the material for any purpose, provided you give
+appropriate credit, link to the license, and distribute your contributions under
+the same license.
+
+Full legal code: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by-sa/4.0/
+
+The repository root is GPL-3.0 for the Mesen2 MCP code. Lua code and Python
+tools under this directory are GPL-3.0. See LICENSING.md for the exact split.

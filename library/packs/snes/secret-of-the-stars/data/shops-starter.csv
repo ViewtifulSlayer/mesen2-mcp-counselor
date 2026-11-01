@@ -1,0 +1,13 @@
+shop,item_count,items
+Likado Weapon,3,Knife|Dagger|ShortSwrd
+Likado Armor,4,ClthSuit|LethSuit|HardSuit|NomalHat
+Likado Item,3,Bread|Antidote|RatTail
+Beegees Item,4,Bread|Antidote|Asprin|Restore
+Beegees Dual,7,Dagger|ShortSwrd|MidSwrd|SteelCane|LethSuit
+Decatas Weapon 1,4,Dagger|ShortSwrd|MidSwrd|LongSwrd
+Decatas Weapon 2,3,SteelCane|HolyCane|Hammer
+Decatas Armor 1,4,ClthSuit|LethSuit|HardSuit|Chainmale
+Decatas Armor 2,4,LethShoes|WoodShoes|NomalHat|Derby
+Decatas Item 1,4,RatTail|MagicLeaf|Telepo|Restore
+Decatas Item 2,4,Bread|Antidote|Asprin|AntiStop
+Decatas Poor Weapon,3,Mittens|Scratcher|Knife

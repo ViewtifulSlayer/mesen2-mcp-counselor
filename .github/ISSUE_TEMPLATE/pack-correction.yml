@@ -1,0 +1,59 @@
+name: Pack correction
+description: Report a wrong, missing, or unverified claim in an existing pack.
+title: "[Correction] <pack> - <page>"
+labels: ["library", "correction"]
+body:
+  - type: input
+    id: pack
+    attributes:
+      label: Pack
+      placeholder: gb/final-fantasy-legend
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page or data file
+      placeholder: references/systems.md
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: The current claim
+      description: Quote the line or name the row, without pasting third-party text.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: The correction
+      description: What should it say, and what is the evidence?
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence
+    attributes:
+      label: How was it checked?
+      options:
+        - Mesen2 MCP memory or state probe
+        - ROM data or disassembly
+        - A source I own
+        - Reproduction in game
+        - Not checked yet
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Exact values
+      description: ROM SHA-1, server version, addresses, frame numbers, or the source title and locator.
+    validations:
+      required: false
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Rights
+      options:
+        - label: This report contains no copyrighted file or guide text.
+          required: true

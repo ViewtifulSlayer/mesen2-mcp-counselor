@@ -1,0 +1,9 @@
+id,pointer,unk1,unk2,unk3,monster1,monster2,monster3
+00,78000,0082,80,00,07,Dram,End,
+01,78002,0582,80,00,07,Bio Dram,End,
+02,78004,0A82,80,00,01,Booth,End,
+03,78006,0F82,80,00,01,Bio Booth,End,
+04,78008,1482,80,01,01,Gara,End,
+05,7800A,1982,80,01,01,Godem,End,
+06,7800C,1E82,80,01,01,Bio Godem,End,
+07,7800E,2382,80,01,01,Bio Gara,End,

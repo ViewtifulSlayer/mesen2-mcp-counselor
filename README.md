@@ -7,6 +7,21 @@ A [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that le
 
 It is a fork of Mesen2 that keeps the emulation core and adds the server on top. The server is a regular **.NET 8** application (`dotnet MesenMcpHost.dll`); there is no installer and no desktop UI to open.
 
+## Counselor Library
+
+This fork adds [`library/`](library/README.md): game-context packs for Mesen2 MCP, an
+Academy for authoring them, and a local-only corpus workflow. A pack gives an agent
+enough grounded context to play, test, reverse-engineer, patch, or localize one game
+without wasting thousands of frames on missing information. It is not a hint line,
+and it ships no copyrighted material.
+
+```bash
+python library/tools/install_pack.py --pack gb/final-fantasy-legend --target .agents/skills
+```
+
+See [`library/README.md`](library/README.md) for the pack catalog, the corpus rules,
+and the release bundles. The emulator and MCP server below are unchanged.
+
 ## Features
 
 - **Run and step:** load ROMs and save states, advance frames (optionally without the frame limiter, 200-370 frames per second), step instructions, scanlines or cycles, run until a condition holds.

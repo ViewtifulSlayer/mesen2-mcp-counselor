@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "schemaVersion": 1,
+  "id": "game-pack",
+  "title": "Game Pack Template",
+  "platform": "gb",
+  "region": "US",
+  "packVersion": "0.1.0",
+  "status": "stub",
+  "license": "CC-BY-SA-4.0",
+  "rom": {
+    "title": "Replace with the exact ROM title",
+    "size": 1,
+    "sha1": "0000000000000000000000000000000000000000",
+    "mapper": "unknown"
+  },
+  "skill": {
+    "name": "game-pack",
+    "entry": "SKILL.md"
+  },
+  "coverage": {
+    "overview": "none",
+    "world": "none",
+    "systems": "none",
+    "data": "none",
+    "harness": "none",
+    "edgeCases": "none",
+    "variants": "none"
+  },
+  "tested": {
+    "mesen2Mcp": ["0.6.0"]
+  },
+  "requires": {
+    "tools": ["load_rom"]
+  },
+  "sources": {
+    "public": "sources/manifest.public.json",
+    "local": "sources/manifest.local.json"
+  },
+  "corpus": {
+    "platform": "gb",
+    "game": "game-pack"
+  },
+  "data": [],
+  "lua": {
+    "libDir": "lua/lib",
+    "recipes": []
+  },
+  "tests": ["tests/field-test.md"]
+}

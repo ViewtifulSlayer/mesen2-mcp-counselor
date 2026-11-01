@@ -1,0 +1,21 @@
+id,name,type,targeting,value
+00,Star Crest,Key,Can't Use,Can't Sell
+01,Win-Key,Key,Can't Use,Can't Sell
+02,MeatBall,Healing,Target Ally,4
+64,Bread,Healing,Target Ally,4
+65,Plum-Plum,Healing,Target Ally,4
+66,Sup-Plum,Magic,Target Ally,1
+67,Vita-Plum,Magic,Target Party,1
+68,Antidote,Status,Target Ally,5
+69,Asprin,Status,Target Ally,9
+6A,Antistop,Status,Target Ally,10
+6B,Restore,Magic,Target Dead,150
+6C,BrknMoon,MP,Target Ally,50
+6D,Dog-Pill,Event,Can't Use,Can't Sell
+6E,Graviton,Boss,Boss Trigger,Can't Sell
+6F,Ballot,Event,Can't Use,Can't Sell
+70,Moustache,Event,Can't Use,Can't Sell
+71,Ticket,Event,Can't Use,Can't Sell
+72,TimeBomb,Event,Field Use,Can't Sell
+73,GoldNail,Event,Can't Use,Can't Sell
+74,Gold-Moai,Event,Can't Use,Can't Sell

@@ -1,0 +1,54 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "schemaVersion": 1,
+  "id": "final-fantasy-legend",
+  "title": "Final Fantasy Legend",
+  "platform": "gb",
+  "region": "US",
+  "packVersion": "0.2.1",
+  "status": "certified",
+  "license": "CC-BY-SA-4.0",
+  "rom": {
+    "title": "Final Fantasy Legend, The (USA)",
+    "size": 131072,
+    "sha1": "901dfc83c72e172d35a376835807fc788444a9bb",
+    "mapper": "MBC2"
+  },
+  "skill": {
+    "name": "ffl-gameplay",
+    "entry": "SKILL.md"
+  },
+  "coverage": {
+    "overview": "verified",
+    "world": "partial",
+    "systems": "verified",
+    "data": "verified",
+    "harness": "verified",
+    "edgeCases": "verified",
+    "variants": "outline"
+  },
+  "tested": {
+    "mesen2Mcp": ["0.5.2", "0.6.0"]
+  },
+  "requires": {
+    "tools": ["load_rom", "read_memory", "run_script", "run_recipe", "list_recipes", "save_state_file", "load_state_file"]
+  },
+  "sources": {
+    "public": "sources/manifest.public.json",
+    "local": "sources/manifest.local.json"
+  },
+  "corpus": {
+    "platform": "gb",
+    "game": "final-fantasy-legend"
+  },
+  "data": [
+    "data/hp-ladder.csv",
+    "data/monsters-confirmed.csv",
+    "data/encounters-world1.csv"
+  ],
+  "lua": {
+    "libDir": "lua/lib",
+    "recipes": ["read-record", "reach-field"]
+  },
+  "tests": ["tests/field-test.md"]
+}

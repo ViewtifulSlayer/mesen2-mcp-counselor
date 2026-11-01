@@ -1,0 +1,7 @@
+crtype_hex,crtype_dec,faq_tag,name,hp_ladder,hp_index,str,def,agi,mana,class_nibble,notes
+$42,66,[42],LIZARD,40,1,5,7,4,2,4,walked; HP observed 38/39/40
+$4E,78,[4e],GOBLIN,20,0,9,6,4,3,2,walked; HP observed 19/20
+$78,120,[78],ZOMBIE,60,2,9,4,3,6,8,walked; HP observed 57/58/59
+$9B,155,[9b],ASIGARU,20,0,5,6,8,3,,first east-bank monster
+$8A,138,[8a],ALBATROS,20,0,,,,,0,hp index 0; +1=0 disproves the mask rule
+$BF,191,[bf],BYAK-KO,1000,24,50,45,50,50,0,forced battle-init; HP observed 963
