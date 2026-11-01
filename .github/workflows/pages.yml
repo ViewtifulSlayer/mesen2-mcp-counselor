@@ -39,6 +39,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check the Pages source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # A branch-sourced site makes configure-pages fail with a generic
+          # "Get Pages site failed". Name the actual fix instead.
+          build_type=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.build_type' 2>/dev/null || echo missing)
+          echo "Pages build_type: $build_type"
+          if [ "$build_type" != "workflow" ]; then
+            echo "::error::Pages source is '$build_type'. In Settings -> Pages, set Source to 'GitHub Actions', then re-run this workflow."
+            exit 1
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v6
 
