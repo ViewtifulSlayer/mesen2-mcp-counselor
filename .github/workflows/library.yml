@@ -108,7 +108,11 @@ jobs:
           python -m unittest discover -s library/tools/tests -v
 
       - name: Build bundles
-        run: python library/tools/build_bundles.py --version "$GITHUB_REF_NAME" --out dist
+        run: |
+          # The tag is library-vX.Y.Z; the builder stamps bundles with the bare
+          # library version and refuses a mismatch with library/VERSION.
+          version="${GITHUB_REF_NAME#library-v}"
+          python library/tools/build_bundles.py --version "$version" --out dist
 
       - name: Publish release
         run: |
