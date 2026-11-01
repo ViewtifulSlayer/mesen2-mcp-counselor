@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 778 200" width="778" height="200" role="img" aria-labelledby="title desc">
+  <title id="title">How a Counselor Library pack is assembled</title>
+  <desc id="desc">Reference material and ROM probes stay on your machine. Ingest and Lua recipes turn them into data tables with provenance and verified addresses, which are distilled into a pack.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path class="head" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+  <style>
+    .box   { fill: #f7f4ff; stroke: #8f83d6; stroke-width: 1.5; }
+    .local { fill: #fffaf0; stroke: #b08d3f; stroke-width: 1.5; stroke-dasharray: 6 4; }
+    .t     { fill: #1f2328; font: 600 13px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .s     { fill: #57606a; font: 11px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 9.5px; }
+    .edge  { stroke: #8f83d6; stroke-width: 1.5; fill: none; }
+    .head  { fill: #8f83d6; }
+    @media (prefers-color-scheme: dark) {
+      .box   { fill: #1e2430; stroke: #7f8fb5; }
+      .local { fill: #241f16; stroke: #c9a227; }
+      .t     { fill: #eef0f4; }
+      .s     { fill: #aeb6c2; }
+      .edge  { stroke: #7f8fb5; }
+      .head  { fill: #7f8fb5; }
+    }
+  </style>
+
+  <!-- stays on the machine -->
+  <rect class="local" x="14" y="58" width="176" height="84" rx="7"/>
+  <text class="t" x="102" y="90" text-anchor="middle">corpus + ROM</text>
+  <text class="s" x="102" y="110" text-anchor="middle">never leaves your machine</text>
+
+  <!-- derived layers -->
+  <rect class="box" x="292" y="14" width="176" height="72" rx="7"/>
+  <text class="t" x="380" y="40" text-anchor="middle">data tables</text>
+  <text class="s" x="380" y="58" text-anchor="middle">+ provenance hashes</text>
+  <text class="s mono" x="380" y="74" text-anchor="middle">via ingest_corpus.py</text>
+
+  <rect class="box" x="292" y="114" width="176" height="72" rx="7"/>
+  <text class="t" x="380" y="146" text-anchor="middle">verified addresses</text>
+  <text class="s" x="380" y="164" text-anchor="middle">from Lua probes</text>
+  <text class="s" x="380" y="180" text-anchor="middle">and field tests</text>
+
+  <!-- the pack -->
+  <rect class="box" x="580" y="44" width="184" height="112" rx="7"/>
+  <text class="t" x="672" y="76" text-anchor="middle">pack</text>
+  <text class="s" x="672" y="98" text-anchor="middle">SKILL.md, references,</text>
+  <text class="s" x="672" y="116" text-anchor="middle">data, lua, tests, sources</text>
+
+  <!-- edges -->
+  <path class="edge" d="M190,100 H240 V50 H286" marker-end="url(#arrow)"/>
+  <path class="edge" d="M190,100 H240 V150 H286" marker-end="url(#arrow)"/>
+  <path class="edge" d="M468,50 H524 V100"/>
+  <path class="edge" d="M468,150 H524 V100"/>
+  <path class="edge" d="M524,100 H574" marker-end="url(#arrow)"/>
+</svg>

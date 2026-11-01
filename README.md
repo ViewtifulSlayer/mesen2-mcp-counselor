@@ -18,24 +18,11 @@ enough grounded context to play, test, reverse-engineer, patch, or localize one 
 without wasting thousands of frames on missing information. It is not a hint line,
 and it ships no copyrighted material.
 
-```mermaid
-flowchart TB
-    subgraph local["on your machine, never committed"]
-        direction LR
-        corpus["corpus<br/>guides, maps, manuals"]
-        rom["ROM in<br/>Mesen2 MCP"]
-    end
+<p align="center">
+  <img src="docs/pack-flow.svg" alt="How a pack is assembled: corpus and ROM probes stay on your machine, feed data tables with provenance and verified addresses from Lua probes and field tests, and distil into a pack">
+</p>
 
-    corpus -->|"ingest_corpus.py"| derived["data tables<br/>+ provenance hashes"]
-    rom -->|"Lua recipes, field test"| verified["verified addresses<br/>and behaviour"]
-
-    derived --> pack
-    verified --> pack
-
-    pack["pack<br/>SKILL.md, references, data, lua, tests, sources"]
-```
-
-The boxed group is the part that cannot ship. Only the distilled layer below it
+The dashed box is the part that cannot ship. Only the distilled layer to its right
 leaves your machine.
 
 ```bash
