@@ -42,6 +42,8 @@ Restart the client after installing so the skill list reloads.
 
 Every archive has `BUNDLE_INFO.txt` with its version, source commit, contents, and license. Every release has `SHA256SUMS.txt`.
 
+How a release is cut, tagged, and published, and how the library track differs from an MCP server version bump, is in `RELEASING.md`.
+
 ## Verify a release
 
 ```bash

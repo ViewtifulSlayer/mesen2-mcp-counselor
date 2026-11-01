@@ -1,11 +1,14 @@
 # Mesen2 MCP
 
-[![Build](https://github.com/Azarem/mesen2-mcp/actions/workflows/build.yml/badge.svg)](https://github.com/Azarem/mesen2-mcp/actions/workflows/build.yml)
-[![Release](https://img.shields.io/github/v/release/Azarem/mesen2-mcp)](https://github.com/Azarem/mesen2-mcp/releases/latest)
+[![Build](https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/actions/workflows/build.yml/badge.svg)](https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/actions/workflows/build.yml)
+[![Counselor Library](https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/actions/workflows/library.yml/badge.svg)](https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/actions/workflows/library.yml)
+[![Release](https://img.shields.io/github/v/release/ViewtifulSlayer/mesen2-mcp-counselor)](https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/releases/latest)
 
 A [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets an AI client drive the [Mesen2](https://github.com/SourMesen/Mesen2) emulator and its debugger. It runs headless, talks JSON-RPC over stdio, and exposes 80 tools: load ROMs, step the CPU, read and write memory, set breakpoints, trace execution, take screenshots, record and replay input, and run Lua scripts, all with frame-exact, scriptable control.
 
 It is a fork of Mesen2 that keeps the emulation core and adds the server on top. The server is a regular **.NET 8** application (`dotnet MesenMcpHost.dll`); there is no installer and no desktop UI to open.
+
+This repository is built on [Azarem's mesen2-mcp](https://github.com/Azarem/mesen2-mcp), kept as the `upstream` remote, and adds the Counselor Library described below. The server code is unchanged; if you only want the emulator and MCP server, upstream's releases work too.
 
 ## Counselor Library
 
@@ -38,7 +41,7 @@ The server works with the systems Mesen2 emulates. The PPU, DMA, OAM and tilemap
 ## Quick start
 
 1. Install the [.NET 8 Runtime](https://dotnet.microsoft.com/download/dotnet/8.0). On Linux and macOS also install SDL2.
-2. Download the zip for your platform from the [latest release](https://github.com/Azarem/mesen2-mcp/releases/latest) and extract it to a permanent folder.
+2. Download the zip for your platform from the [latest release](https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/releases/latest) and extract it to a permanent folder.
 3. Add the server to your MCP client (Cursor shown; other clients are covered [below](#4-register-the-server-with-your-mcp-client)):
 
 ```json
@@ -68,7 +71,7 @@ No ROMs are included. Use only ROMs you are entitled to use.
 
 ### 2. Download
 
-1. Open the [latest release](https://github.com/Azarem/mesen2-mcp/releases/latest) (all versions: [Releases](https://github.com/Azarem/mesen2-mcp/releases)).
+1. Open the [latest release](https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/releases/latest) (all versions: [Releases](https://github.com/ViewtifulSlayer/mesen2-mcp-counselor/releases)).
 2. Download the zip for your platform, for example `mesen2-mcp-win-x64.zip`, `mesen2-mcp-linux-x64.zip`, `mesen2-mcp-osx-arm64.zip`.
 3. Extract it to a **permanent** folder (your MCP client will point at it), not to Downloads or a temp folder:
 
@@ -208,7 +211,7 @@ Only .NET builds are supported: there are no NativeAOT or single-file builds. Th
 Pick the runtime identifier for your machine: `win-x64`, `linux-x64`, `linux-arm64`, `osx-x64` or `osx-arm64` (`<rid>` below).
 
 ```
-git clone https://github.com/Azarem/mesen2-mcp.git
+git clone https://github.com/ViewtifulSlayer/mesen2-mcp-counselor.git
 cd mesen2-mcp
 
 # 1. Native core. Windows (Developer PowerShell or Command Prompt):

@@ -60,7 +60,7 @@ The repository is the full distribution. Tagged releases also provide smaller bu
 - `counselor-authoring-vX.Y.Z.zip` - the academy, tools, template, and both example packs (FFL and Secret of the Stars).
 - `counselor-corpus-vX.Y.Z.zip` - the corpus scaffold and index tools.
 
-Bundles are built from git-known files only, so they cannot contain the local corpus or local manifests. The test suite and its fixtures stay in the repository and are not shipped. See `INSTALL.md`.
+Bundles are built from git-known files only, so they cannot contain the local corpus or local manifests. The test suite and its fixtures stay in the repository and are not shipped. See `INSTALL.md` to install one, and `RELEASING.md` for how a library tag publishes the bundles, how that differs from an MCP version bump, and where each artifact appears.
 
 ## Licenses
 

@@ -117,7 +117,11 @@ jobs:
       - name: Publish release
         run: |
           version="${GITHUB_REF_NAME#library-v}"
+          # --latest=false keeps GitHub's "Latest" badge on the server release.
+          # Two tracks share this repository; /releases/latest should hand out
+          # the emulator, not a library-only archive.
           gh release create "$GITHUB_REF_NAME" dist/*.zip dist/SHA256SUMS.txt \
             --target "$GITHUB_SHA" \
             --title "Counselor Library $version" \
+            --latest=false \
             --generate-notes
