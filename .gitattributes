@@ -61,3 +61,6 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+# The Counselor Library hashes data tables byte-for-byte in provenance.json.
+# Pin LF so a Windows checkout hashes the same bytes as CI.
+library/packs/*/*/data/*.csv text eol=lf

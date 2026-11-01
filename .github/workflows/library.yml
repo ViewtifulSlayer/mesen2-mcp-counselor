@@ -2,9 +2,9 @@ name: Counselor Library
 
 # Validates the additive library under library/ without building the emulator.
 #
-#  * Every push and pull request that touches the library validates the packs,
-#    regenerates the catalog in check mode, runs the tool tests, and inspects the
-#    release bundles.
+#  * Every push and pull request that touches the library checks the tree layout
+#    first, then validates the packs, regenerates the catalog in check mode, runs
+#    the tool tests, and inspects the release bundles.
 #  * Pushing a tag like library-v0.1.0 publishes the library bundles. The tag
 #    must match library/VERSION. This workflow never builds or releases the MCP
 #    server; upstream's build.yml owns that.
@@ -48,6 +48,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Runs before the dependencies install and before validation: git drops
+      # empty directories, so a locally-authored lua/lib would first appear as a
+      # FileNotFoundError inside the test suite.
+      - name: Check the tree layout
+        run: python library/tools/check_tree.py
+
       - name: Install tool dependencies
         run: python -m pip install --disable-pip-version-check -r library/tools/requirements.txt
 
@@ -78,6 +84,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Check the tree layout
+        run: python library/tools/check_tree.py
 
       - name: Install tool dependencies
         run: python -m pip install --disable-pip-version-check -r library/tools/requirements.txt

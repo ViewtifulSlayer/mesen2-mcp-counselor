@@ -19,7 +19,8 @@ def ignore_local(_directory: str, names: list[str]) -> set[str]:
     return {
         name
         for name in names
-        if name in {"manifest.local.json", "__pycache__", ".git"} or name.endswith(".pyc")
+        if name in {"manifest.local.json", "__pycache__", ".git", ".gitkeep"}
+        or name.endswith(".pyc")
     }
 
 

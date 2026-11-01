@@ -144,8 +144,63 @@ class TemplateValidationTest(unittest.TestCase):
 
     def test_rom_file_is_rejected(self) -> None:
         rom = self.pack / "lua" / "lib" / "sample.gb"
+        rom.parent.mkdir(parents=True, exist_ok=True)
         rom.write_bytes(b"not a rom")
         self.assertTrue(any("forbidden extension" in item for item in self.errors()))
+
+
+class TreeLayoutTest(unittest.TestCase):
+    def stage(self, root: Path) -> None:
+        """Stage the copied tree so the preflight sees tracked files."""
+        subprocess.run(["git", "init", "-q"], cwd=root, check=True, capture_output=True)
+        subprocess.run(["git", "add", "-A"], cwd=root, check=True, capture_output=True)
+
+    def test_repository_layout_is_complete(self) -> None:
+        result = run(str(TOOLS / "check_tree.py"), "--no-git")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_missing_template_directory_is_reported(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            shutil.copytree(TEMPLATE, root / "library" / "academy" / "templates" / "game-pack")
+            shutil.copytree(
+                REPO / "library" / "packs" / "gb" / "final-fantasy-legend",
+                root / "library" / "packs" / "gb" / "final-fantasy-legend",
+            )
+            shutil.rmtree(root / "library" / "academy" / "templates" / "game-pack" / "lua")
+
+            result = run(str(TOOLS / "check_tree.py"), "--root", str(root), "--no-git")
+
+            self.assertEqual(result.returncode, 1, result.stdout)
+            self.assertIn("pack template: missing directory", result.stderr)
+            self.assertIn("lua/lib/recipes", result.stderr)
+
+    def test_placeholder_keeps_an_empty_directory_tracked(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            template = root / "library" / "academy" / "templates" / "game-pack"
+            shutil.copytree(TEMPLATE, template)
+            shutil.copytree(
+                REPO / "library" / "packs" / "gb" / "final-fantasy-legend",
+                root / "library" / "packs" / "gb" / "final-fantasy-legend",
+            )
+            self.stage(root)
+            self.assertEqual(
+                run(str(TOOLS / "check_tree.py"), "--root", str(root)).returncode,
+                0,
+            )
+
+            # Drop the placeholder from the index. The directory still exists on
+            # disk, but a clean checkout would not create it.
+            subprocess.run(
+                ["git", "rm", "-q", "--cached", "library/academy/templates/game-pack/assets/schematics/.gitkeep"],
+                cwd=root,
+                check=True,
+                capture_output=True,
+            )
+            result = run(str(TOOLS / "check_tree.py"), "--root", str(root))
+            self.assertEqual(result.returncode, 1, result.stdout)
+            self.assertIn("has no tracked files", result.stderr)
 
 
 class CorpusIngestTest(unittest.TestCase):
