@@ -191,6 +191,21 @@
     letter-spacing: .13em; text-transform: uppercase;
   }
 
+  .anatomy-figure {
+    margin: 0 auto 1.5rem; max-width: 812px; padding: 1rem;
+    background: var(--paper-3); border: 1px solid var(--line); border-radius: 8px;
+    display: grid; justify-items: center;
+  }
+  .anatomy-figure img { max-width: 100%; height: auto; }
+  /* Below this width the diagram would shrink past legibility; let it scroll instead. */
+  @media (max-width: 620px) {
+    .anatomy-figure {
+      padding: .6rem; overflow-x: auto; justify-items: start;
+      scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+    }
+    .anatomy-figure img { max-width: none; }
+  }
+
   /* sections */
   section { padding-block: clamp(2.4rem, 5vw, 4rem); }
   section + section { border-top: 1px solid var(--line-soft); }
@@ -471,6 +486,10 @@
         <h2>What is inside a pack.</h2>
         <p>The same six pieces in every pack, so an agent knows where to look before it knows the game.</p>
       </div>
+      <figure class="anatomy-figure">
+        <img src="pack-flow.svg" width="778" height="200" loading="lazy"
+             alt="How a pack is assembled: a corpus and ROM probes stay on your machine, feed data tables with provenance and verified addresses, and distil into a pack.">
+      </figure>
       <div class="cards">
         <div class="card">
           <h3><code>SKILL.md</code></h3>
