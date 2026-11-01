@@ -19,8 +19,9 @@ without wasting thousands of frames on missing information. It is not a hint lin
 and it ships no copyrighted material.
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph local["on your machine, never committed"]
+        direction LR
         corpus["corpus<br/>guides, maps, manuals"]
         rom["ROM in<br/>Mesen2 MCP"]
     end
@@ -31,12 +32,10 @@ flowchart LR
     derived --> pack
     verified --> pack
 
-    pack["pack<br/>SKILL.md, references, data, lua, tests, sources"] -->|"install_pack.py"| installed["skill in .agents/skills"]
-    installed --> agent["agent: play, test,<br/>reverse-engineer, patch"]
-    academy["Academy<br/>lessons, rubric, template"] -.->|"authoring"| pack
+    pack["pack<br/>SKILL.md, references, data, lua, tests, sources"]
 ```
 
-The left column is the part that cannot ship. Only the distilled layer on the right
+The boxed group is the part that cannot ship. Only the distilled layer below it
 leaves your machine.
 
 ```bash
