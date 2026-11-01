@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /social/social-card.html
+
+Sitemap: https://viewtifulslayer.github.io/mesen2-mcp-counselor/sitemap.xml
