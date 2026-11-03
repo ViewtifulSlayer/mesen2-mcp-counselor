@@ -1,0 +1,88 @@
+area,path,type,length,status,meaning,evidence
+root,systemSaveData,object,-,verified,"One system block per file: sfSys, systemData, configData",SaveData.bin.json; save_layout.md 1
+root,saveDataList,array,59,verified,"Numbered save slots; count the array, not the marker literal",fixture; save_layout.md 1
+root,quickSaveData,object,1,verified,"Independent quick snapshot, not a mirror of the active slot",fixture; save_layout.md 1.1
+root,autoSaveData,object,1,verified,"Independent auto snapshot, not a mirror of the active slot",fixture; save_layout.md 1.1
+slot,saveItemInfoData,object,7 keys,verified,Cheap slot metadata for the picker,fixture
+slot,saveDataJsonStr,string,~68.6 KB,verified,Nested JSON string; requires a second JSON.parse,fixture
+saveItemInfoData,CharacterNumber,number,-,verified,Leader character ID; 5 = Asellus in slot 0,fixture
+saveItemInfoData,CharacterName,string,-,verified,Fullwidth Latin name; do not normalize away,fixture
+saveItemInfoData,MapNumber,number,-,verified,"0-based area index, not a room ID",fixture; save_layout.md 8.2
+saveItemInfoData,PlayTimeHours,number,-,verified,Slot play time hours,fixture
+saveItemInfoData,PlayTimeMinutes,number,-,verified,Slot play time minutes,fixture
+saveItemInfoData,IsTakeover,bool,-,observed,"NG+ carry-over marker (crown), not completion",fixture; agent_state slot_flags
+saveItemInfoData,RouteCharacterNumber,number,-,observed,Fuse route character; 5 = Asellus in the 2021 file,fixture
+sfSys,buf,array[int8],24,not mapped,Raw system buffer,save_layout.md 3.1
+sfSys,name,array[int8],16,not mapped,Name/key field,save_layout.md 3.1
+sfSys,chk,array[int8],1,integrity,Checksum-like; algorithm unknown,save_layout.md 3.1; runbook 7
+sfSys,chk2,array[int8],3,integrity,Checksum-like; algorithm unknown,save_layout.md 3.1; runbook 7
+sfSys,chk3,array[int8],3,integrity,Checksum-like; algorithm unknown,save_layout.md 3.1; runbook 7
+sfSys,chk4,array[int8],2,integrity,Checksum-like; algorithm unknown,save_layout.md 3.1; runbook 7
+sfSys,blood,number,-,observed,Questionnaire blood type; no verified effect,save_layout.md 3.1
+sfSys,seiza,number,-,observed,Questionnaire zodiac; no verified effect,save_layout.md 3.1
+sfSys,learning,array,8,not mapped,Unknown,save_layout.md 3.1
+sfSys,parLev,number,-,observed,"New-scenario starting Battle Rank; 0 no clear, 33 post-clear",save_layout.md 3.1; runbook 4.11
+sfSys,start,array,9,observed,Per-hero scenario start count,runbook completion_record
+sfSys,end,array,9,observed,Per-hero clear count,runbook completion_record
+sfSys,end2,array,9,observed,Per-hero true-ending count,runbook completion_record
+sfSys,id,array,32,not mapped,Unknown,save_layout.md 3.1
+sfSys,fill,array,23,not mapped,Padding or unknown,save_layout.md 3.1
+sfSys,sum,array,1,integrity,Checksum-like; algorithm unknown,save_layout.md 3.1
+systemData,clearFlag,array,16,verified,"HERO-indexed clear flags; 3 Fuse, 5 Asellus",save_layout.md 3.2
+systemData,joinedFlag,array,41,observed,All false with a one-member party; not the active roster,save_layout.md 3.2
+systemData,enterRegionFlag,array,31,observed,Region-entry flags; index map unmapped,save_layout.md 3.2
+systemData,mapIntroFlag,array,9,observed,Map-intro flags; index map unmapped,save_layout.md 3.2
+systemData,endingFlag,array,17,verified,"ENDING-indexed; 6 Asellus half, 14 Fuse Asellus",save_layout.md 3.2
+systemData,isFuseAppearance,bool,-,observed,Fuse appearance state,runbook completion_record
+systemData,totalFuseBossNum,array,8,observed,Fuse boss counts; all zero in the 2021 file,runbook completion_record
+systemData,totalFuseRootStart,array,8,observed,Fuse route starts; index 4 inferred Asellus,runbook completion_record
+systemData,totalFuseRootClear,array,8,observed,Fuse route clears; index 4 inferred Asellus,runbook completion_record
+systemData,saveDataIndex,number,-,observed,Active slot index in saveDataList,runbook completion_record
+systemData,shopRecordList,array,17,verified,"Purchase ledger of fixed stock tables, not visited shops",save_layout.md 3.2
+systemData,goldSaleMoney,number,-,observed,Gold sale money,save_layout.md 3.2
+configData,language,number/string,-,observed,Display language selector; values not decoded,save_layout.md 3.3
+configData,isEnableAutoSave,bool,-,observed,Auto-save toggle,save_layout.md 3.3
+configData,padKeyconfigData,object,-,observed,Pad input mapping; keycodes not decoded,save_layout.md 3.3
+configData,keyboardKeyconfigData,object,-,observed,Keyboard input mapping; keycodes not decoded,save_layout.md 3.3
+inner,ply,array,41,verified,One record per character; presence is not party membership,fixture; save_layout.md 6
+pty,psnCnt,number,-,verified,Active party count; 1 in slot 0,fixture
+pty,heroNo,number,-,verified,Leader character ID; 5 in slot 0,fixture
+pty,chrNo,array,56,verified,Roster order; 255 padded,fixture
+pty,companionChrNo,array,56,verified,Companion list; 255 padded,fixture
+pty,team,array,56,verified,Active party order; 255 padded,fixture
+pty,money,number,-,verified,Party money; 100 in slot 0,fixture
+pty,item_a,array,257,verified,"Inventory entries {itemNo,itemCnt}; empty 255/0",fixture; save_layout.md 5.2
+pty,snroFlg,array,512,observed,Scenario flags; mix of bit fields and counters,save_layout.md 5.3
+pty,boxFlg,array,64,not mapped,All zero in slot 0,save_layout.md 5.3
+pty,scenarioChartStateArray,array,1024,partial,Indices 157/158 map to Asellus chart labels; set-value meaning unknown,save_layout.md 5.3
+pty,event_btl,array,16,observed,All zero in slot 0,save_layout.md 5.3
+pty,cfg1,array,12,observed,"Order list, likely",save_layout.md 5.3
+pty.each,parLev,number,-,observed,Packed Battle Rank Points; 16 points per rank,save_layout.md 5.5; runbook 4.11
+pty.each,combo_,array,40,not mapped,65535 empty,save_layout.md 5.5
+pty,time,number,-,observed,Tick clock shared with eventwk.counter,save_layout.md 7.1
+eventwk,mapNo,number,-,verified,"Previous map ID, not the current room",fixture; save_layout.md 8.1
+eventwk,xpos,number,-,verified,Player X position,fixture
+eventwk,zpos,number,-,verified,Player Z position,fixture
+eventwk,counter,number,-,observed,Tick clock; difference from pty.time is constant per map,save_layout.md 7.1
+eventwk,wk,array,32,not mapped,"Sparse, no mapping",save_layout.md 7
+eventwk,temp,array,256,observed,"temp[192] = additional-content mode (1 on, 0 off); rest unmapped",save_layout.md 7; agent_state slot_flags
+mapwk,map_name,number,-,verified,0-based area index; 26 = Chateau Aiguille,fixture; save_layout.md 8.2
+mapwk,region_no,number,-,observed,Region number,save_layout.md 8
+mapwk,imfName,string,-,verified,"Current room asset name, e.g. imf303 = 771",fixture; save_layout.md 8.1
+mapwk,Value4,number,-,verified,Duplicate of the current room ID,fixture; save_layout.md 8.1
+mapwk,obj,array,64,not mapped,Fixed capacity; only obj_cnt entries live,save_layout.md 8
+mapwk,vx,number,-,observed,View X,save_layout.md 8
+mapwk,vy,number,-,observed,View Y,save_layout.md 8
+mapwk,vz,number,-,observed,View Z,save_layout.md 8
+ply[],hpMax,number,-,verified,Maximum HP only; no current-HP field,save_layout.md 6; runbook 4.2
+ply[],lpNow,number,-,verified,Current LP,fixture
+ply[],race,number,byte 0x16,verified,Race/gender code,save_layout.md 6
+ply[],nature,number,byte 0x15,verified,Gifts bitfield,save_layout.md 6
+ply[],getType,number,byte 0x17,not mapped,No glossary; values 0-11 seen,save_layout.md 6
+ply[],getskill,array,64,verified,Ability bit grid; MSB-first; ability=(byte-0x38)*8+bit,runbook 4.2
+ply[],eqpAtk,array,8,verified,Equipped arts; 65535 empty,fixture
+ply[],eqpItm,array,8,verified,Equipped items; 255 empty,fixture
+ply[],tribial_work,array,16,partial,"Race scratch: Mec data[0]/[2], Monster data[0], Mystic data[4..12]",save_layout.md 6
+ply[],mPart,number,-,not mapped,240 on all but one record,save_layout.md 6
+ply[],allLpLoss,bool,-,observed,All-LP-loss flag,save_layout.md 6
+pty,parLev,missing,-,do not use,Phantom path; the live value is pty.each.parLev,save_layout.md 5.6

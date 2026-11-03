@@ -119,6 +119,9 @@ def pack_requirements(pack_dir: Path, label: str) -> tuple[list[str], list[str]]
     files.extend(str(item) for item in manifest.get("data") or [])
     files.extend(str(item) for item in manifest.get("tests") or [])
 
+    harness = manifest.get("harness") or {}
+    files.extend(str(item) for item in harness.get("scripts") or [])
+
     lua = manifest.get("lua") or {}
     lib_dir = lua.get("libDir")
     if lib_dir:

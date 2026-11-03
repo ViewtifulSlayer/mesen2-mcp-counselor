@@ -1,5 +1,5 @@
 {
-  "libraryVersion": "0.1.0",
+  "libraryVersion": "0.2.0",
   "packs": [
     {
       "id": "final-fantasy-legend",
@@ -299,6 +299,242 @@
           "region": "US",
           "language": "en",
           "note": "The verified measurements behind this pack; the log is not shipped."
+        }
+      ],
+      "variants": [
+        "jp",
+        "us",
+        "differences"
+      ]
+    },
+    {
+      "id": "saga-frontier-remastered",
+      "title": "SaGa Frontier Remastered",
+      "platform": "pc",
+      "region": "US",
+      "packVersion": "0.1.0",
+      "status": "verified",
+      "path": "packs/pc/saga-frontier-remastered",
+      "skill": "sfr-save-mapping",
+      "coverage": {
+        "overview": "verified",
+        "world": "partial",
+        "systems": "partial",
+        "data": "verified",
+        "harness": "partial",
+        "edgeCases": "verified",
+        "variants": "partial"
+      },
+      "pages": [
+        {
+          "name": "overview",
+          "path": "packs/pc/saga-frontier-remastered/references/overview.md",
+          "title": "Overview",
+          "summary": "Release identity, save-tool scope, the three data layers, terminology, and how to route a task.",
+          "coverage": "verified",
+          "sources": 2
+        },
+        {
+          "name": "world",
+          "path": "packs/pc/saga-frontier-remastered/references/world.md",
+          "title": "World and location model",
+          "summary": "How the save names a place: room vs area vs previous map, the 69-area table, 869 room IDs, and the fixture movement.",
+          "coverage": "partial",
+          "sources": 1
+        },
+        {
+          "name": "systems",
+          "path": "packs/pc/saga-frontier-remastered/references/systems.md",
+          "title": "Systems stored in the save",
+          "summary": "Party, roster, scenario flags, Battle Rank, INIT sets, shops, races, Mec/Mystic/Monster records, and completion state.",
+          "coverage": "partial",
+          "sources": 3
+        },
+        {
+          "name": "data",
+          "path": "packs/pc/saga-frontier-remastered/references/data.md",
+          "title": "Data and ID namespaces",
+          "summary": "ID ranges, name-table offsets, asset vs community provenance, ability schools, and the 11 runtime tables.",
+          "coverage": "verified",
+          "sources": 5
+        },
+        {
+          "name": "harness",
+          "path": "packs/pc/saga-frontier-remastered/references/harness.md",
+          "title": "Harness",
+          "summary": "The save-file lab, raw DEFLATE rules, diff and fixture recipes, and the staged BepInEx/IL2CPP runtime bridge plan.",
+          "coverage": "partial",
+          "sources": 4
+        },
+        {
+          "name": "edge-cases",
+          "path": "packs/pc/saga-frontier-remastered/references/edge-cases.md",
+          "title": "Edge cases and traps",
+          "summary": "The traps that produce plausible but wrong values, the failure signatures, and the fields that must stay unmapped.",
+          "coverage": "verified",
+          "sources": 4
+        },
+        {
+          "name": "variants",
+          "path": "packs/pc/saga-frontier-remastered/variants/differences.md",
+          "title": "Regional differences",
+          "summary": "What changes between the regional releases.",
+          "coverage": "partial",
+          "sources": 4
+        }
+      ],
+      "sources": {
+        "total": 10,
+        "localOnly": 7,
+        "repoSafe": 3,
+        "permissioned": 0
+      },
+      "sourceList": [
+        {
+          "id": "sfr-save-tool",
+          "title": "SaGa Frontier Remastered Save Tool",
+          "author": "ViewtifulSlayer",
+          "license": "MIT",
+          "redistribution": "repo-safe",
+          "covers": [
+            "overview",
+            "world",
+            "systems",
+            "data",
+            "harness",
+            "edgeCases",
+            "variants"
+          ],
+          "region": "US",
+          "language": "en",
+          "url": "https://github.com/ViewtifulSlayer/saga-frontier-save-tool",
+          "note": "Primary public source: the save tool, its docs, and its 11 runtime tables. Facts were re-expressed in this pack's schema; no guide text is included."
+        },
+        {
+          "id": "pcgamingwiki-sfr",
+          "title": "SaGa Frontier Remastered",
+          "author": "PCGamingWiki contributors",
+          "license": "CC-BY-NC-SA",
+          "redistribution": "local-only",
+          "covers": [
+            "overview",
+            "variants"
+          ],
+          "region": "US",
+          "language": "en",
+          "note": "Engine, platform, and Steam app identity. Facts only; no text included."
+        },
+        {
+          "id": "bepinex-issue-229",
+          "title": "IL2CPP Preloader - fatal error when getting unity version info (BepInEx issue #229)",
+          "author": "BlacRyu, Kein, ghorsington",
+          "license": "all-rights-reserved",
+          "redistribution": "local-only",
+          "covers": [
+            "harness",
+            "edgeCases"
+          ],
+          "region": "Global",
+          "language": "en",
+          "note": "SF1R v1.0 Steam build 6443908 with BepInEx 6.0.0 BE 361; version-parse crash fixed 2021-04-17. Facts only."
+        },
+        {
+          "id": "bepinex-mcp",
+          "title": "bepinex-mcp: live Unity and BepInEx bridge for AI agents",
+          "author": "rkuhn153",
+          "license": "MIT",
+          "redistribution": "repo-safe",
+          "covers": [
+            "harness"
+          ],
+          "region": "Global",
+          "language": "en",
+          "url": "https://github.com/rkuhn153/bepinex-mcp",
+          "note": "Reference for the HTTP bridge, stable selectors, and dynamic patches. Not a dependency and not tested on this game."
+        },
+        {
+          "id": "il2cppdumper",
+          "title": "Il2CppDumper",
+          "author": "Perfare",
+          "license": "MIT",
+          "redistribution": "repo-safe",
+          "covers": [
+            "harness"
+          ],
+          "region": "Global",
+          "language": "en",
+          "url": "https://github.com/Perfare/Il2CppDumper",
+          "note": "Dump path for GameAssembly.dll and global-metadata.dat."
+        },
+        {
+          "id": "ffvd-sfr-modding",
+          "title": "SaGa Frontier Remastered Modding",
+          "author": "Flippin' Fun Video Games / SkyeSage",
+          "license": "all-rights-reserved",
+          "redistribution": "local-only",
+          "covers": [
+            "systems",
+            "variants",
+            "edgeCases"
+          ],
+          "region": "US",
+          "language": "en",
+          "note": "Asset-edit workflow, UABE/BNE2/PPF, and the localization freeze. Facts only; no tutorial text included."
+        },
+        {
+          "id": "ffvd-baccarat-skills",
+          "title": "BaccaratTblData - Skills",
+          "author": "Flippin' Fun Video Games",
+          "license": "all-rights-reserved",
+          "redistribution": "local-only",
+          "covers": [
+            "data",
+            "variants"
+          ],
+          "region": "US/JP",
+          "language": "en/ja",
+          "note": "English/Japanese Path IDs 1234/574 and skill-table offsets. Facts only."
+        },
+        {
+          "id": "sf-data-project",
+          "title": "SaGa Frontier Data Mechanics Guide",
+          "author": "Zaraktheus, Erroneous_Waylay, Mir_Vimes",
+          "license": "all-rights-reserved",
+          "redistribution": "local-only",
+          "covers": [
+            "systems",
+            "data",
+            "edgeCases"
+          ],
+          "region": "US",
+          "language": "en",
+          "note": "PS1 mechanics, INIT tables, Mec/Mystic/Monster formulas, and Battle Rank packing. Facts only; no guide text included."
+        },
+        {
+          "id": "essence-of-saga",
+          "title": "The Essence of SaGa Frontier - Item Selling",
+          "author": "Essence of SaGa Frontier contributors",
+          "license": "all-rights-reserved",
+          "redistribution": "local-only",
+          "covers": [
+            "data"
+          ],
+          "region": "US",
+          "language": "en",
+          "note": "Item sale locations used to label shop stock tables. Facts only."
+        },
+        {
+          "id": "steam-shopaholic",
+          "title": "Shopaholic shop grouping discussion",
+          "author": "Steam Community users",
+          "license": "all-rights-reserved",
+          "redistribution": "local-only",
+          "covers": [
+            "data"
+          ],
+          "region": "Global",
+          "language": "en",
+          "note": "Cross-check for shop grouping. Facts only."
         }
       ],
       "variants": [

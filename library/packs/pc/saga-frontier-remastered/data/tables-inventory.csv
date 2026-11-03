@@ -1,0 +1,19 @@
+kind,table,file,records,status,source,generator,notes
+runtime,Name tables,docs/constants.json,"64 characters, 256 items, 69 areas",asset,resources.assets fixed-width tables,tests/sfr_save_tool/extract_name_tables.js,"Offsets 7,738,252 / 7,783,498 / 7,782,118"
+runtime,Ability names,docs/ability_names.json,512,documented,gameinfo/json/abilities.json; ability_elements.htm,tests/sfr_save_tool/build_gameinfo.py,14 element flags; 7 ambiguous names
+runtime,Flag names,docs/flag_names.json,"169 bytes, 440 bits, 345 states",documented,gameinfo/discord/bf386d29fa5f29d5.txt,tests/sfr_save_tool/build_flags.py,CP932 source; 169 named of 512 bytes
+runtime,Flag glosses,docs/flag_meanings_en.json,"710 meanings, 167 blocks",draft,flag_names.json; reviewed TSV batches,tests/sfr_save_tool/build_flag_translations.py,Unofficial English gloss
+runtime,INIT sets,docs/init_sets.json,"4 sets, 158 records",documented,gameinfo/json/characters_init.json,tests/sfr_save_tool/build_init_sets.py,INIT 3 unobserved
+runtime,Mec item stats,docs/item_stats.json,240,documented,Data Mechanics Guide [ITEMD03],tests/sfr_save_tool/build_item_stats.py,0x00-0xEF; Mec column only
+runtime,Map names,docs/map_names.json,869,community,gameinfo/json/maps.json; IMF_File_Names.txt,tests/sfr_save_tool/build_gameinfo.py,319 gaps; one reviewed correction
+runtime,Monster forms,docs/monster_forms.json,"256 forms, 120 targets",documented,Data Mechanics Guide transformation tables,tests/sfr_save_tool/build_monster_forms.py,13 Table 1 targets (16 rows) + 107 Table 2 targets (128 rows)
+runtime,Monster lab,docs/monster_lab.json,"134 abilities, 88 form-stat entries",documented,Data Mechanics Guide; Oulak blocks,tests/sfr_save_tool/build_monster_lab.py,86 Oulak blocks; Space Magic is Head but cannot satisfy
+runtime,Mystic absorbs,docs/mystic_absorbs.json,"256 enemies, 465 slots",documented,Data Mechanics Guide [MYSAB02],tests/sfr_save_tool/build_mystic_absorbs.py,160 enemies with arts
+runtime,Shop labels,docs/shop_names.json,17,documented,Essence of SaGa item-selling page; Steam grouping,manual label review,"Location + stock, not in-game names"
+source,Gameinfo manifest,docs/gameinfo/json/manifest.json,"512 abilities, 256 items, 869 maps",generated,community sources,tests/sfr_save_tool/build_gameinfo.py,Source hashes and counts
+source,INIT characters,docs/gameinfo/json/characters_init.json,40 x 4,generated,"INITDATA, INI2DATA, INI3DATA, INI4DATA",tests/sfr_save_tool/build_gameinfo.py,Four sets; source defects recorded
+source,Character layout,docs/gameinfo/json/char_record_layout.json,256-byte layout + 512-bit grid,generated,char_status.txt,tests/sfr_save_tool/build_gameinfo.py,60 recorded grid defects
+source,Abilities,docs/gameinfo/json/abilities.json,512,generated,PS1 ability structs + element flags,tests/sfr_save_tool/build_gameinfo.py,505/512 struct agreement
+source,Items,docs/gameinfo/json/items.json,256,generated,PS1 item structs + asset names,tests/sfr_save_tool/build_gameinfo.py,242/256 name agreement
+source,Maps,docs/gameinfo/json/maps.json,869,generated,community map list + IMF names,tests/sfr_save_tool/build_gameinfo.py,One reviewed correction
+source,Guide sections,docs/gameinfo/json/mechanics_guide_sections.json,186 sections,generated,Data Mechanics Guide,tests/sfr_save_tool/build_gameinfo.py,Section index; no guide text

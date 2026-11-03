@@ -12,7 +12,6 @@
     "packVersion",
     "status",
     "license",
-    "rom",
     "skill",
     "coverage",
     "tested",
@@ -20,14 +19,17 @@
     "sources",
     "corpus",
     "data",
-    "lua",
     "tests"
+  ],
+  "anyOf": [
+    { "required": ["rom"] },
+    { "required": ["target"] }
   ],
   "properties": {
     "schemaVersion": { "const": 1 },
     "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
     "title": { "type": "string", "minLength": 1 },
-    "platform": { "enum": ["gb", "gbc", "gba", "nes", "snes", "genesis", "sms", "gg", "pce", "other"] },
+    "platform": { "enum": ["gb", "gbc", "gba", "nes", "snes", "genesis", "sms", "gg", "pce", "pc", "other"] },
     "region": { "type": "string", "minLength": 2 },
     "packVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
     "status": { "enum": ["stub", "draft", "verified", "certified"] },
@@ -40,6 +42,34 @@
         "size": { "type": "integer", "minimum": 1 },
         "sha1": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
         "mapper": { "type": "string" }
+      }
+    },
+    "target": {
+      "type": "object",
+      "required": ["kind", "title", "build", "files"],
+      "properties": {
+        "kind": { "enum": ["rom", "unity", "native", "other"] },
+        "title": { "type": "string", "minLength": 1 },
+        "build": { "type": "string", "minLength": 1 },
+        "region": { "type": "string" },
+        "language": { "type": "string" },
+        "unityVersion": { "type": "string" },
+        "scriptingBackend": { "enum": ["mono", "il2cpp", "unknown"] },
+        "metadataVersion": { "type": "integer", "minimum": 1 },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["role", "path", "bytes", "sha256"],
+            "properties": {
+              "role": { "type": "string", "minLength": 1 },
+              "path": { "type": "string", "minLength": 1 },
+              "bytes": { "type": "integer", "minimum": 1 },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        }
       }
     },
     "skill": {
@@ -65,14 +95,22 @@
     },
     "tested": {
       "type": "object",
-      "required": ["mesen2Mcp"],
       "properties": {
         "mesen2Mcp": {
           "type": "array",
           "minItems": 1,
           "items": { "type": "string" }
+        },
+        "harness": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
         }
-      }
+      },
+      "anyOf": [
+        { "required": ["mesen2Mcp"] },
+        { "required": ["harness"] }
+      ]
     },
     "requires": {
       "type": "object",
@@ -111,6 +149,20 @@
       "properties": {
         "libDir": { "type": "string" },
         "recipes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "harness": {
+      "type": "object",
+      "required": ["kind", "scripts"],
+      "properties": {
+        "kind": { "enum": ["mesen2-lua", "save-file", "runtime-bridge", "mixed"] },
+        "scripts": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "recipes": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "string" }
       }
     },
     "tests": {

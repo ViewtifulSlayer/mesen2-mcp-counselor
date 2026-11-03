@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "bundles": {
     "library": {
       "include": ["library/**"],
@@ -13,6 +13,7 @@
         "library/permissions/**",
         "library/packs/gb/final-fantasy-legend/**",
         "library/packs/snes/secret-of-the-stars/**",
+        "library/packs/pc/saga-frontier-remastered/**",
         "library/corpus/README.md",
         "library/README.md",
         "library/INSTALL.md",
@@ -44,6 +45,10 @@
     },
     "pack:secret-of-the-stars": {
       "include": ["library/packs/snes/secret-of-the-stars/**"],
+      "exclude": []
+    },
+    "pack:saga-frontier-remastered": {
+      "include": ["library/packs/pc/saga-frontier-remastered/**"],
       "exclude": []
     }
   }

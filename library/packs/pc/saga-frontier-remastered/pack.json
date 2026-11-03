@@ -1,0 +1,115 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "schemaVersion": 1,
+  "id": "saga-frontier-remastered",
+  "title": "SaGa Frontier Remastered",
+  "platform": "pc",
+  "region": "US",
+  "packVersion": "0.1.0",
+  "status": "verified",
+  "license": "CC-BY-SA-4.0",
+  "target": {
+    "kind": "unity",
+    "title": "SaGa Frontier Remastered (Steam, PC)",
+    "build": "Steam app 1295270; local install measured 2026-11-03",
+    "region": "US",
+    "language": "en",
+    "unityVersion": "2019.4.16f1",
+    "scriptingBackend": "il2cpp",
+    "metadataVersion": 24,
+    "files": [
+      {
+        "role": "executable",
+        "path": "SaGa Frontier Remastered.exe",
+        "bytes": 884376,
+        "sha256": "ee5791abda515de0509530a2e719cae08958865120bb201c2fc905ea94f6baee"
+      },
+      {
+        "role": "unity_player",
+        "path": "UnityPlayer.dll",
+        "bytes": 25957808,
+        "sha256": "f015940f30f981c29d9e937085cb39866152bc6c0e07c6d927e3a3e40a52dec1"
+      },
+      {
+        "role": "game_assembly",
+        "path": "GameAssembly.dll",
+        "bytes": 37480960,
+        "sha256": "f157541f60fbf9824464968fc2b1545d7a15f59a06e39aae9c573fd9cedaa1ce"
+      },
+      {
+        "role": "il2cpp_metadata",
+        "path": "SaGa Frontier Remastered_Data/il2cpp_data/Metadata/global-metadata.dat",
+        "bytes": 8165108,
+        "sha256": "c58d2e1464b3abb55577a95807adcc2864c1ea1a57210ae73d8541756c0c5ff6"
+      },
+      {
+        "role": "global_managers",
+        "path": "SaGa Frontier Remastered_Data/globalgamemanagers",
+        "bytes": 2632172,
+        "sha256": "2b247e4b4b17f52d104126600a160ab04d8299c6c62c638a133e77829cbdb443"
+      },
+      {
+        "role": "resources_assets",
+        "path": "SaGa Frontier Remastered_Data/resources.assets",
+        "bytes": 144872176,
+        "sha256": "1d99d8d8f6802cc6e3a04f45fda7c421ca0aa0d50259641bc70b379aa586591f"
+      }
+    ]
+  },
+  "skill": {
+    "name": "sfr-save-mapping",
+    "entry": "SKILL.md"
+  },
+  "coverage": {
+    "overview": "verified",
+    "world": "partial",
+    "systems": "partial",
+    "data": "verified",
+    "harness": "partial",
+    "edgeCases": "verified",
+    "variants": "partial"
+  },
+  "tested": {
+    "harness": [
+      "save_lab.py 0.1.0 on Python 3.14 with the Asellus and T260G fixtures"
+    ]
+  },
+  "requires": {
+    "tools": [
+      "python3.11+",
+      "zlib (raw DEFLATE, wbits=-15)"
+    ]
+  },
+  "sources": {
+    "public": "sources/manifest.public.json",
+    "local": "sources/manifest.local.json"
+  },
+  "corpus": {
+    "platform": "pc",
+    "game": "saga-frontier-remastered"
+  },
+  "data": [
+    "data/save-fields.csv",
+    "data/sentinels.csv",
+    "data/id-namespaces.csv",
+    "data/unity-build.csv",
+    "data/known-gaps.csv",
+    "data/tables-inventory.csv"
+  ],
+  "harness": {
+    "kind": "save-file",
+    "scripts": [
+      "harness/save_lab.py"
+    ],
+    "recipes": [
+      "inflate",
+      "deflate",
+      "diff",
+      "assert-fixture"
+    ],
+    "notes": "The save-file lab is implemented and tested. The BepInEx 6 IL2CPP runtime bridge is specified in references/harness.md and is not part of this pack."
+  },
+  "tests": [
+    "tests/field-test.md"
+  ]
+}

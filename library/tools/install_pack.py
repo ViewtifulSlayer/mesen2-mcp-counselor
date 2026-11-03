@@ -47,13 +47,18 @@ def main() -> int:
 
     target_root.mkdir(parents=True, exist_ok=True)
     shutil.copytree(pack, destination, ignore=ignore_local)
-    lib_dir = (destination / data["lua"]["libDir"]).resolve()
 
     print(f"Installed {data['title']} to {destination}")
     print(f"Skill: {skill_name}")
-    print(f"Lua library: {lib_dir}")
-    print("Add this to the Mesen2 MCP server arguments:")
-    print(f"  --mcp-lib-dir={lib_dir}")
+    lua = data.get("lua") or {}
+    if lua.get("libDir"):
+        lib_dir = (destination / lua["libDir"]).resolve()
+        print(f"Lua library: {lib_dir}")
+        print("Add this to the Mesen2 MCP server arguments:")
+        print(f"  --mcp-lib-dir={lib_dir}")
+    else:
+        print("No Lua kit: this pack uses a harness instead.")
+        print(f"Harness: {destination / 'references' / 'harness.md'}")
     print("Restart the client so the skill list reloads.")
     return 0
 

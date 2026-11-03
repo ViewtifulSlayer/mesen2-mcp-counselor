@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "tables": [
+    {
+      "file": "data/save-fields.csv",
+      "origin": "source",
+      "source": "Save tool docs: save_layout.md sections 1-9, project_runbook.md sections 3-4, and the fixture assertions.",
+      "generator": "tests/build_tables.py",
+      "sha256": "cf09c500520833d3c6e455b13d67b6ff1417225ac68410c25a2a5a30e4a63665",
+      "verifiedOn": "2026-11-03",
+      "notes": "Field inventory with status and evidence. 87 rows; no field is invented."
+    },
+    {
+      "file": "data/sentinels.csv",
+      "origin": "source",
+      "source": "Save tool docs: save_layout.md section 9.",
+      "generator": "tests/build_tables.py",
+      "sha256": "62871d7887fe8e2a27b9f7762811cd24bb6893f7ac6d656332de82d5ccf6e2f5",
+      "verifiedOn": "2026-11-03",
+      "notes": "Empty and padding values used by the save."
+    },
+    {
+      "file": "data/id-namespaces.csv",
+      "origin": "source",
+      "source": "Save tool runtime tables and docs/gameinfo/json/manifest.json.",
+      "generator": "tests/build_tables.py",
+      "sha256": "41459f036185e6cab57f4ac859cb2167d13137b5618cbc3d43531b7c4b743a48",
+      "verifiedOn": "2026-11-03",
+      "notes": "Ranges and counts; names stay in the runtime tables."
+    },
+    {
+      "file": "data/unity-build.csv",
+      "origin": "observation",
+      "source": "Local SaGa Frontier Remastered install, measured 2026-11-03.",
+      "generator": "tests/build_tables.py",
+      "sha256": "fbeb4299f065c76c98c1b27b45f0477e48d5ba964923fef4e79f5d99a9385964",
+      "verifiedOn": "2026-11-03",
+      "notes": "Six SHA-256 values that pin the build. No binaries are included."
+    },
+    {
+      "file": "data/known-gaps.csv",
+      "origin": "source",
+      "source": "Save tool docs: save_layout.md section 11 and agent_state.json next_session.",
+      "generator": "tests/build_tables.py",
+      "sha256": "b26a5c2b66e6b6e6bdb509533d7f10d0d7e9d86b0b4e4b3162ab504b43a1c120",
+      "verifiedOn": "2026-11-03",
+      "notes": "Each gap names the next test; open questions are not presented as answers."
+    },
+    {
+      "file": "data/tables-inventory.csv",
+      "origin": "source",
+      "source": "Save tool runtime tables, their generators, and docs/gameinfo/json/manifest.json.",
+      "generator": "tests/build_tables.py",
+      "sha256": "56e4bdc736d10468b25fc63defc1d2cf2a005900294b1c225843531c4c5c6a5f",
+      "verifiedOn": "2026-11-03",
+      "notes": "11 runtime tables and 7 gameinfo source datasets."
+    }
+  ]
+}

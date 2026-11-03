@@ -21,9 +21,10 @@ and zero rights failures.
 
 ## Reproducibility - 20 points
 
-- The ROM identity is exact.
-- The field test names the server version and expected values.
-- Lua recipes load from `lua/lib` and declare their kit.
+- The ROM identity, or the `target` build identity, is exact.
+- The field test names the server version or harness version and expected values.
+- Lua recipes load from `lua/lib` and declare their kit, or declared harness
+  scripts run and are checked by the validator.
 - The route or probe steps are specific enough to repeat.
 - No test depends on a state that cannot be identified.
 

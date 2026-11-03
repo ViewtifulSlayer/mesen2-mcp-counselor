@@ -1,0 +1,21 @@
+area,field,why_blocked,next_test,status
+integrity,sfSys.chk,No known algorithm; no checksum fixer for this title,Hook the game's save write and compare inputs/outputs,integrity
+integrity,sfSys.chk2,Same as chk,Hook the save write,integrity
+integrity,sfSys.chk3,Same as chk,Hook the save write,integrity
+integrity,sfSys.chk4,Same as chk,Hook the save write,integrity
+integrity,sfSys.sum,Same as chk,Hook the save write,integrity
+integrity,pty.sum,Same as chk,Hook the save write,integrity
+character,getType (0x17),No glossary; values 0-11 seen,Controlled save diffs,not mapped
+character,tribial_work remaining bytes,Only the Mec/Monster/Mystic subsets are mapped,Progression diffs,partial
+character,mPart,240 on all but one record,Controlled save diffs,not mapped
+flags,boxFlg,All zero in slot 0,Trigger events and diff,not mapped
+flags,eventwk.wk,"Sparse, no mapping",Trigger events and diff,not mapped
+flags,eventwk.temp except 192,Only 192 is mapped,Trigger events and diff,observed
+flags,snroFlg 343 bytes,"169 named, 343 unnamed",Extend the dictionary or hook writes,observed
+map,mapwk.obj[],Struct array undecoded,Compare maps,not mapped
+map,room 0x1A9 (425),Gap in the community map table,Find a save in the room,verified
+area,current vs scenario-start,No fixture crosses areas,Post-area-change save,unverified
+init,INIT 3 (BR 4-6),No BR 4-6 clear fixture,Controlled clear or live bridge,unverified
+completion,last-clear rank,Not sfSys.parLev,Hook the save write at clear,unverified
+fuse,"Fuse routes 0-3, 5-7",One fixture; index 4 inferred Asellus,Second route fixture,partial
+character,chrNo 0x40,No name-table entry,Asset search or live inspection,unmapped

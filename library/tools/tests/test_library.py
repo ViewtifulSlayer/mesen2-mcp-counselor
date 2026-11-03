@@ -11,6 +11,8 @@ material.
 
 from __future__ import annotations
 
+import copy
+import io
 import json
 import shutil
 import subprocess
@@ -19,6 +21,7 @@ import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from unittest import mock
 
 TOOLS = Path(__file__).resolve().parents[1]
 REPO = TOOLS.parents[1]
@@ -27,6 +30,7 @@ FIXTURE_CORPUS = Path(__file__).resolve().parent / "fixtures" / "corpus"
 
 sys.path.insert(0, str(TOOLS))
 
+import build_bundles  # noqa: E402
 from validate_pack import check_pack  # noqa: E402
 
 
@@ -39,6 +43,19 @@ def run(*args: str, cwd: Path = REPO) -> subprocess.CompletedProcess:
         encoding="utf-8",
         errors="replace",
     )
+
+
+def pack_manifests() -> list[Path]:
+    return sorted((REPO / "library" / "packs").glob("*/*/pack.json"))
+
+
+def authoring_pack_gaps(packs: list[Path], archive_names: set[str]) -> list[str]:
+    required = {
+        f"{manifest.parent.relative_to(REPO).as_posix()}/{name}"
+        for manifest in packs
+        for name in ("pack.json", "SKILL.md")
+    }
+    return sorted(required - archive_names)
 
 
 class TemplateValidationTest(unittest.TestCase):
@@ -146,6 +163,11 @@ class TemplateValidationTest(unittest.TestCase):
         rom = self.pack / "lua" / "lib" / "sample.gb"
         rom.parent.mkdir(parents=True, exist_ok=True)
         rom.write_bytes(b"not a rom")
+        self.assertTrue(any("forbidden extension" in item for item in self.errors()))
+
+    def test_save_file_is_rejected(self) -> None:
+        save = self.pack / "data" / "SaveData.bin"
+        save.write_bytes(b"not a save")
         self.assertTrue(any("forbidden extension" in item for item in self.errors()))
 
 
@@ -298,6 +320,214 @@ class InstallAndBundleTest(unittest.TestCase):
                     any(name.endswith("manifest.local.json") for name in names),
                     f"{archive.name} contains a local manifest",
                 )
+
+    def test_authoring_bundle_contains_every_pack(self) -> None:
+        packs = pack_manifests()
+        self.assertTrue(packs, "No pack manifests found under library/packs")
+
+        version = (REPO / "library" / "VERSION").read_text(encoding="utf-8").strip()
+
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "dist"
+            built = run(
+                str(TOOLS / "build_bundles.py"),
+                "--bundle",
+                "authoring",
+                "--out",
+                str(out),
+            )
+            self.assertEqual(built.returncode, 0, built.stdout + built.stderr)
+
+            archive = out / f"counselor-authoring-v{version}.zip"
+            self.assertTrue(archive.exists(), f"missing authoring archive: {archive}")
+            with zipfile.ZipFile(archive) as zipped:
+                names = set(zipped.namelist())
+
+        missing = authoring_pack_gaps(packs, names)
+        self.assertEqual(
+            missing,
+            [],
+            f"Authoring bundle is missing pack file(s): {', '.join(missing)}",
+        )
+
+    def test_authoring_guard_detects_a_removed_pack_include(self) -> None:
+        packs = pack_manifests()
+        self.assertTrue(packs, "No pack manifests found under library/packs")
+        release = json.loads(
+            (REPO / "library" / "release.json").read_text(encoding="utf-8")
+        )
+        spec = copy.deepcopy(release["bundles"]["authoring"])
+        victim = packs[-1].parent.relative_to(REPO).as_posix()
+        include = f"{victim}/**"
+        self.assertIn(include, spec["include"])
+        spec["include"].remove(include)
+
+        files = [
+            path
+            for path in build_bundles.tracked_or_untracked()
+            if build_bundles.eligible(path, spec)
+        ]
+        version = (REPO / "library" / "VERSION").read_text(encoding="utf-8").strip()
+
+        with tempfile.TemporaryDirectory() as temp:
+            archive = Path(temp) / "authoring.zip"
+            build_bundles.write_bundle(archive, "authoring", version, files, spec)
+            with zipfile.ZipFile(archive) as zipped:
+                names = set(zipped.namelist())
+
+        missing = authoring_pack_gaps(packs, names)
+        self.assertIn(f"{victim}/pack.json", missing)
+        self.assertIn(f"{victim}/SKILL.md", missing)
+
+    def test_every_pack_has_a_per_pack_bundle(self) -> None:
+        packs = pack_manifests()
+        self.assertTrue(packs, "No pack manifests found under library/packs")
+        release = json.loads(
+            (REPO / "library" / "release.json").read_text(encoding="utf-8")
+        )
+        entry_gaps = build_bundles.pack_bundle_entry_problems(release)
+        self.assertEqual(
+            entry_gaps,
+            [],
+            "Per-pack bundle coverage failed:\n- " + "\n- ".join(entry_gaps),
+        )
+        problems: list[str] = []
+
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "dist"
+            for manifest in packs:
+                pack_dir = manifest.parent
+                pack_id = pack_dir.name
+                bundle_name = f"pack:{pack_id}"
+                relative = pack_dir.relative_to(REPO).as_posix()
+
+                built = run(
+                    str(TOOLS / "build_bundles.py"),
+                    "--bundle",
+                    bundle_name,
+                    "--out",
+                    str(out),
+                )
+                if built.returncode != 0:
+                    problems.append(
+                        f"{relative}: build failed: "
+                        f"{(built.stderr or built.stdout).strip()}"
+                    )
+                    continue
+
+                pack_version = json.loads(
+                    manifest.read_text(encoding="utf-8")
+                )["packVersion"]
+                archive = out / f"counselor-pack-{pack_id}-v{pack_version}.zip"
+                if not archive.exists():
+                    problems.append(f"{relative}: missing archive {archive.name}")
+                    continue
+
+                with zipfile.ZipFile(archive) as zipped:
+                    names = set(zipped.namelist())
+
+                missing = sorted({"pack.json", "SKILL.md"} - names)
+                if missing:
+                    problems.append(
+                        f"{relative}: {archive.name} missing root file(s): "
+                        + ", ".join(missing)
+                    )
+                nested = sorted(name for name in names if name.startswith("library/"))
+                if nested:
+                    problems.append(
+                        f"{relative}: {archive.name} keeps repository paths: "
+                        + ", ".join(nested[:3])
+                    )
+
+        self.assertEqual(
+            problems,
+            [],
+            "Per-pack bundle coverage failed:\n- " + "\n- ".join(problems),
+        )
+
+    def test_per_pack_guard_detects_a_removed_bundle(self) -> None:
+        packs = pack_manifests()
+        self.assertTrue(packs, "No pack manifests found under library/packs")
+        release = json.loads(
+            (REPO / "library" / "release.json").read_text(encoding="utf-8")
+        )
+        bundles = copy.deepcopy(release["bundles"])
+        victim = packs[-1].parent
+        bundle_name = f"pack:{victim.name}"
+        self.assertIn(bundle_name, bundles)
+        del bundles[bundle_name]
+
+        gaps = build_bundles.missing_pack_bundle_entries({"bundles": bundles})
+        relative = victim.relative_to(REPO).as_posix()
+        self.assertIn(
+            f"{relative}: no '{bundle_name}' entry in release.json",
+            gaps,
+        )
+
+    def test_bundle_check_fails_without_a_per_pack_entry(self) -> None:
+        release = json.loads(
+            (REPO / "library" / "release.json").read_text(encoding="utf-8")
+        )
+        victim = pack_manifests()[-1].parent
+        bundle_name = f"pack:{victim.name}"
+        del release["bundles"][bundle_name]
+        stderr = io.StringIO()
+
+        with mock.patch.object(build_bundles, "read_json", return_value=release), \
+            mock.patch.object(sys, "argv", ["build_bundles.py", "--check"]), \
+            mock.patch("sys.stderr", new=stderr):
+            status = build_bundles.main()
+
+        self.assertEqual(status, 1)
+        self.assertIn(
+            f"no '{bundle_name}' entry in release.json",
+            stderr.getvalue(),
+        )
+
+    def test_bundle_check_fails_with_a_stale_per_pack_entry(self) -> None:
+        release = json.loads(
+            (REPO / "library" / "release.json").read_text(encoding="utf-8")
+        )
+        bundle_name = "pack:not-a-real-pack"
+        release["bundles"][bundle_name] = {
+            "include": ["library/packs/not-a-real-pack/**"],
+            "exclude": [],
+        }
+        stderr = io.StringIO()
+
+        with mock.patch.object(build_bundles, "read_json", return_value=release), \
+            mock.patch.object(sys, "argv", ["build_bundles.py", "--check"]), \
+            mock.patch("sys.stderr", new=stderr):
+            status = build_bundles.main()
+
+        self.assertEqual(status, 1)
+        self.assertIn(
+            f"'{bundle_name}' has no matching pack directory",
+            stderr.getvalue(),
+        )
+
+    def test_bundle_check_fails_with_a_mismatched_pack_include(self) -> None:
+        release = json.loads(
+            (REPO / "library" / "release.json").read_text(encoding="utf-8")
+        )
+        victim = pack_manifests()[-1].parent
+        bundle_name = f"pack:{victim.name}"
+        manifest_path = victim.relative_to(REPO).as_posix() + "/pack.json"
+        release["bundles"][bundle_name]["include"] = [
+            "library/packs/not-a-real-pack/**"
+        ]
+        stderr = io.StringIO()
+
+        with mock.patch.object(build_bundles, "read_json", return_value=release), \
+            mock.patch.object(sys, "argv", ["build_bundles.py", "--check"]), \
+            mock.patch("sys.stderr", new=stderr):
+            status = build_bundles.main()
+
+        self.assertEqual(status, 1)
+        self.assertIn(
+            f"'{bundle_name}' does not select {manifest_path}",
+            stderr.getvalue(),
+        )
 
 
 class CatalogTest(unittest.TestCase):

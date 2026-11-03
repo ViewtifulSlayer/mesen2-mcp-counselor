@@ -41,6 +41,7 @@ FORBIDDEN_EXTENSIONS = {
     ".mss",
     ".sav",
     ".srm",
+    ".bin",
     ".ips",
     ".bps",
     ".zip",

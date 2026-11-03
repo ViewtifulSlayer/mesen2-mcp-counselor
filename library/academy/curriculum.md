@@ -12,6 +12,10 @@ Seven lessons. Each one ends with an artifact that feeds the next.
 | 6. Write the pack | How do we make it usable without overwhelming? | `SKILL.md`, references, data, schematics, Lua |
 | 7. Review and certify | Is it accurate, reproducible, and clean? | `CERTIFICATION.md` or a documented gap |
 
+For a non-cartridge target, substitute the build identity (`target`) for the ROM
+identity and a fixture/harness check for the Mesen field test. The PC/Unity
+example is `library/packs/pc/saga-frontier-remastered`.
+
 ## Lesson 1 - Identify the edition
 
 Hash the ROM, read the header, and record size and mapper. A patched or

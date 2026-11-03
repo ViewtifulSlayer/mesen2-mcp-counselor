@@ -1,0 +1,10 @@
+meaning,value,width,notes
+Empty character ID,255,8-bit,"chrNo, companionChrNo, team, itemNo, eqpItm"
+Empty item ID,255,8-bit,item_a[].itemNo
+Empty equipment attack slot,65535,16-bit,eqpAtk[]
+Empty equipment item slot,255,8-bit,eqpItm[]
+Empty combo entry,65535,16-bit,pty.each.combo_[]
+Character-array padding,255,8-bit,all three 56-length party arrays
+Empty inventory entry,"{itemNo:255,itemCnt:0}",pair,item_a[]
+Enemy NotUse,255,8-bit,enemy/form table; 255 is not a real absorb
+Missing key-item range,0xF0-0xFF,16 ids,not equippable; item stats omit them

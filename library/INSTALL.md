@@ -12,7 +12,7 @@ Nothing in `library/` changes the emulator, the MCP server, or `mcp-version.txt`
 python library/tools/install_pack.py --pack gb/final-fantasy-legend --target .agents/skills
 ```
 
-The pack becomes `.agents/skills/ffl-gameplay/`. The installer prints the pack's Lua library path. Add it to the Mesen2 MCP server arguments:
+The pack becomes `.agents/skills/ffl-gameplay/`. For a cartridge pack the installer prints the Lua library path; add it to the Mesen2 MCP server arguments:
 
 ```json
 {
@@ -29,6 +29,8 @@ The pack becomes `.agents/skills/ffl-gameplay/`. The installer prints the pack's
 }
 ```
 
+A harness pack such as SaGa Frontier Remastered has no Lua kit. The installer prints its `references/harness.md` instead, and the pack runs its own save-file lab. No MCP server argument is needed for that pack.
+
 Restart the client after installing so the skill list reloads.
 
 ## Release bundles
@@ -37,7 +39,7 @@ Restart the client after installing so the skill list reloads.
 |---|---|---|
 | `counselor-library-vX.Y.Z.zip` | `library/` without corpus contents or local manifests | Extract at the root of a `mesen2-mcp` checkout |
 | `counselor-pack-<game>-vX.Y.Z.zip` | One pack, `SKILL.md` at the archive root | Extract into `.agents/skills/<skill-name>/` |
-| `counselor-authoring-vX.Y.Z.zip` | Academy, schemas, tools, template, and the FFL and Secret of the Stars examples | Extract anywhere; run tools from the extracted `library/` |
+| `counselor-authoring-vX.Y.Z.zip` | Academy, schemas, tools, template, and the FFL, Secret of the Stars, and SaGa Frontier Remastered examples | Extract anywhere; run tools from the extracted `library/` |
 | `counselor-corpus-vX.Y.Z.zip` | Corpus scaffold, ingest, query, and schemas | Extract anywhere; point `--corpus` at your local sources |
 
 Every archive has `BUNDLE_INFO.txt` with its version, source commit, contents, and license. Every release has `SHA256SUMS.txt`.

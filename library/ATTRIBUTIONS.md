@@ -39,6 +39,29 @@ No third-party text is included.
 - **FFL session 20261101-01: walk, records, HP derivation, harness** by Resonance7 project (CC-BY-SA-4.0; local-only).
   - The verified measurements behind this pack; the log is not shipped.
 
+## SaGa Frontier Remastered
+
+- **SaGa Frontier Remastered Save Tool** by ViewtifulSlayer (MIT; repo-safe).
+  - Primary public source: the save tool, its docs, and its 11 runtime tables. Facts were re-expressed in this pack's schema; no guide text is included.
+- **SaGa Frontier Remastered** by PCGamingWiki contributors (CC-BY-NC-SA; local-only).
+  - Engine, platform, and Steam app identity. Facts only; no text included.
+- **IL2CPP Preloader - fatal error when getting unity version info (BepInEx issue #229)** by BlacRyu, Kein, ghorsington (all-rights-reserved; local-only).
+  - SF1R v1.0 Steam build 6443908 with BepInEx 6.0.0 BE 361; version-parse crash fixed 2021-04-17. Facts only.
+- **bepinex-mcp: live Unity and BepInEx bridge for AI agents** by rkuhn153 (MIT; repo-safe).
+  - Reference for the HTTP bridge, stable selectors, and dynamic patches. Not a dependency and not tested on this game.
+- **Il2CppDumper** by Perfare (MIT; repo-safe).
+  - Dump path for GameAssembly.dll and global-metadata.dat.
+- **SaGa Frontier Remastered Modding** by Flippin' Fun Video Games / SkyeSage (all-rights-reserved; local-only).
+  - Asset-edit workflow, UABE/BNE2/PPF, and the localization freeze. Facts only; no tutorial text included.
+- **BaccaratTblData - Skills** by Flippin' Fun Video Games (all-rights-reserved; local-only).
+  - English/Japanese Path IDs 1234/574 and skill-table offsets. Facts only.
+- **SaGa Frontier Data Mechanics Guide** by Zaraktheus, Erroneous_Waylay, Mir_Vimes (all-rights-reserved; local-only).
+  - PS1 mechanics, INIT tables, Mec/Mystic/Monster formulas, and Battle Rank packing. Facts only; no guide text included.
+- **The Essence of SaGa Frontier - Item Selling** by Essence of SaGa Frontier contributors (all-rights-reserved; local-only).
+  - Item sale locations used to label shop stock tables. Facts only.
+- **Shopaholic shop grouping discussion** by Steam Community users (all-rights-reserved; local-only).
+  - Cross-check for shop grouping. Facts only.
+
 ## Secret of the Stars
 
 - **Secret of the Stars technical data (Google doc by Landmine36)** by Landmine36 (unknown; local-only).

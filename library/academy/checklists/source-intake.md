@@ -1,6 +1,7 @@
 # Source intake checklist
 
-- [ ] Game, platform, region, and ROM SHA-1 are recorded.
+- [ ] Game, platform, region, and ROM SHA-1 or `target` build hashes are
+      recorded.
 - [ ] The source has an ID, title, author, license, region, and language.
 - [ ] The source is in the correct corpus category.
 - [ ] Its hash is recorded in `manifest.local.json`.

@@ -22,12 +22,65 @@ from _common import REPO_ROOT, read_json, rel
 LIBRARY = REPO_ROOT / "library"
 RELEASE_FILE = LIBRARY / "release.json"
 VERSION_FILE = LIBRARY / "VERSION"
-FORBIDDEN_EXT = {".smc", ".sfc", ".gb", ".gbc", ".gba", ".nes", ".mss", ".sav", ".srm", ".ips", ".bps", ".zip", ".rar", ".7z"}
+FORBIDDEN_EXT = {".smc", ".sfc", ".gb", ".gbc", ".gba", ".nes", ".mss", ".sav", ".srm", ".bin", ".ips", ".bps", ".zip", ".rar", ".7z"}
 FORBIDDEN_PARTS = {"example_library", "manifest.local.json", ".index"}
 
 
 def version() -> str:
     return VERSION_FILE.read_text(encoding="utf-8").strip()
+
+
+def shipped_pack_manifests() -> list[Path]:
+    return sorted((REPO_ROOT / "library" / "packs").glob("*/*/pack.json"))
+
+
+def missing_pack_bundle_entries(release: dict) -> list[str]:
+    bundles = release.get("bundles", {})
+    problems = []
+    for manifest in shipped_pack_manifests():
+        relative = rel(manifest.parent)
+        bundle_name = f"pack:{manifest.parent.name}"
+        if bundle_name not in bundles:
+            problems.append(f"{relative}: no '{bundle_name}' entry in release.json")
+    return problems
+
+
+def stale_pack_bundle_entries(release: dict) -> list[str]:
+    pack_ids = {manifest.parent.name for manifest in shipped_pack_manifests()}
+    problems = []
+    for bundle_name in sorted(release.get("bundles", {})):
+        if not bundle_name.startswith("pack:"):
+            continue
+        pack_id = bundle_name.split(":", 1)[1]
+        if pack_id not in pack_ids:
+            problems.append(
+                f"release.json: '{bundle_name}' has no matching pack directory"
+            )
+    return problems
+
+
+def mismatched_pack_bundle_entries(release: dict) -> list[str]:
+    bundles = release.get("bundles", {})
+    problems = []
+    for manifest in shipped_pack_manifests():
+        bundle_name = f"pack:{manifest.parent.name}"
+        spec = bundles.get(bundle_name)
+        if spec is None:
+            continue
+        manifest_path = rel(manifest)
+        if not eligible(manifest_path, spec):
+            problems.append(
+                f"release.json: '{bundle_name}' does not select {manifest_path}"
+            )
+    return problems
+
+
+def pack_bundle_entry_problems(release: dict) -> list[str]:
+    return (
+        missing_pack_bundle_entries(release)
+        + stale_pack_bundle_entries(release)
+        + mismatched_pack_bundle_entries(release)
+    )
 
 
 def source_commit() -> str:
@@ -180,18 +233,17 @@ def main() -> int:
     all_files = tracked_or_untracked()
 
     if args.check:
+        problems = pack_bundle_entry_problems(release)
         if args.check == "__build__":
             with tempfile.TemporaryDirectory() as temp:
                 out = Path(temp)
                 for name, spec in release["bundles"].items():
                     files = [path for path in all_files if eligible(path, spec)]
                     write_bundle(out / f"{name.replace(':', '-')}.zip", name, args.version, files, spec)
-                problems = []
                 for zip_path in sorted(out.glob("*.zip")):
                     problems.extend(inspect_bundle(zip_path))
         else:
             folder = Path(args.check).resolve()
-            problems = []
             for zip_path in sorted(folder.glob("*.zip")):
                 problems.extend(inspect_bundle(zip_path))
             if not list(folder.glob("*.zip")):

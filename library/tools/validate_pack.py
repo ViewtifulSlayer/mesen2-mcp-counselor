@@ -221,10 +221,15 @@ def check_pack(pack: Path) -> tuple[list[str], list[str]]:
             if "Rights failures: 0" not in text:
                 errors.append(f"{rel(cert)}: certification must state 'Rights failures: 0'")
 
+    harness = data.get("harness") or {}
+    for script in harness.get("scripts") or []:
+        if not (pack / script).exists():
+            errors.append(f"{rel(pack)}: declared harness script missing: {script}")
+
     if not data.get("data"):
         warnings.append(f"{rel(pack)}: no data tables declared")
-    if not data.get("lua", {}).get("recipes"):
-        warnings.append(f"{rel(pack)}: no Lua recipes declared")
+    if not data.get("lua", {}).get("recipes") and not (harness.get("scripts") or harness.get("recipes")):
+        warnings.append(f"{rel(pack)}: no Lua recipes or harness scripts declared")
 
     return errors, warnings
 

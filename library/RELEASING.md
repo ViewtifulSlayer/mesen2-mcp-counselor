@@ -6,7 +6,7 @@ repository but not a version, a tag, or a workflow.
 | Track | Version file | Tag | Workflow | Release |
 |---|---|---|---|---|
 | Mesen2 MCP server | `mcp-version.txt` | `vX.Y.Z` | `.github/workflows/build.yml` | Five platform zips |
-| Counselor Library | `library/VERSION` | `library-vX.Y.Z` | `.github/workflows/library.yml` | Five bundle zips |
+| Counselor Library | `library/VERSION` | `library-vX.Y.Z` | `.github/workflows/library.yml` | Six bundle zips |
 
 Nothing is uploaded by hand. Both workflows build on the runner and publish
 with `GITHUB_TOKEN`; no secrets are configured and none are needed.
@@ -30,8 +30,11 @@ with `GITHUB_TOKEN`; no secrets are configured and none are needed.
 3. `build_catalog.py --check` - `CATALOG.md`, `PAGE_INDEX.md`, `catalog.json`,
    and `ATTRIBUTIONS.md` match the packs.
 4. `python -m unittest discover -s library/tools/tests` - the tool suite.
-5. `build_bundles.py --check` - builds every bundle in a temp directory and
-   inspects it for corpus content, local manifests, and forbidden extensions.
+5. `build_bundles.py --check` - requires every shipped pack to have a matching
+   `pack:<name>` bundle entry that selects its `pack.json`, rejects stale
+   `pack:*` entries with no pack directory, then builds every bundle in a temp
+   directory and inspects it for corpus content, local manifests, and forbidden
+   extensions.
 
 ### What `release` does
 
@@ -49,8 +52,8 @@ with `GITHUB_TOKEN`; no secrets are configured and none are needed.
 
 ```bash
 # 1. Bump the version and describe the change.
-#    library/VERSION, library/CHANGELOG.md, each pack's CHANGELOG.md,
-#    and library/release-notes/<version>.md
+#    library/VERSION, library/release.json "version", library/CHANGELOG.md,
+#    each pack's CHANGELOG.md, and library/release-notes/<version>.md
 
 # 2. Rehearse locally.
 python library/tools/check_tree.py
@@ -178,8 +181,8 @@ library version.
 
 | Archive | Contents |
 |---|---|
-| `counselor-library-v<lib>.zip` | The whole public library, including both packs |
-| `counselor-authoring-v<lib>.zip` | Academy, schemas, tools, template, both packs |
+| `counselor-library-v<lib>.zip` | The whole public library, including all three packs |
+| `counselor-authoring-v<lib>.zip` | Academy, schemas, tools, template, all three packs |
 | `counselor-corpus-v<lib>.zip` | Corpus scaffold, schemas, ingest and query tools |
 | `counselor-pack-<pack>-v<pack>.zip` | One pack, `SKILL.md` at the archive root |
 

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "sfr-save-tool",
+      "title": "SaGa Frontier Remastered Save Tool",
+      "author": "ViewtifulSlayer",
+      "license": "MIT",
+      "redistribution": "repo-safe",
+      "covers": [
+        "overview",
+        "world",
+        "systems",
+        "data",
+        "harness",
+        "edgeCases",
+        "variants"
+      ],
+      "region": "US",
+      "language": "en",
+      "url": "https://github.com/ViewtifulSlayer/saga-frontier-save-tool",
+      "note": "Primary public source: the save tool, its docs, and its 11 runtime tables. Facts were re-expressed in this pack's schema; no guide text is included."
+    },
+    {
+      "id": "pcgamingwiki-sfr",
+      "title": "SaGa Frontier Remastered",
+      "author": "PCGamingWiki contributors",
+      "license": "CC-BY-NC-SA",
+      "redistribution": "local-only",
+      "covers": [
+        "overview",
+        "variants"
+      ],
+      "region": "US",
+      "language": "en",
+      "note": "Engine, platform, and Steam app identity. Facts only; no text included."
+    },
+    {
+      "id": "bepinex-issue-229",
+      "title": "IL2CPP Preloader - fatal error when getting unity version info (BepInEx issue #229)",
+      "author": "BlacRyu, Kein, ghorsington",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": [
+        "harness",
+        "edgeCases"
+      ],
+      "region": "Global",
+      "language": "en",
+      "note": "SF1R v1.0 Steam build 6443908 with BepInEx 6.0.0 BE 361; version-parse crash fixed 2021-04-17. Facts only."
+    },
+    {
+      "id": "bepinex-mcp",
+      "title": "bepinex-mcp: live Unity and BepInEx bridge for AI agents",
+      "author": "rkuhn153",
+      "license": "MIT",
+      "redistribution": "repo-safe",
+      "covers": [
+        "harness"
+      ],
+      "region": "Global",
+      "language": "en",
+      "url": "https://github.com/rkuhn153/bepinex-mcp",
+      "note": "Reference for the HTTP bridge, stable selectors, and dynamic patches. Not a dependency and not tested on this game."
+    },
+    {
+      "id": "il2cppdumper",
+      "title": "Il2CppDumper",
+      "author": "Perfare",
+      "license": "MIT",
+      "redistribution": "repo-safe",
+      "covers": [
+        "harness"
+      ],
+      "region": "Global",
+      "language": "en",
+      "url": "https://github.com/Perfare/Il2CppDumper",
+      "note": "Dump path for GameAssembly.dll and global-metadata.dat."
+    },
+    {
+      "id": "ffvd-sfr-modding",
+      "title": "SaGa Frontier Remastered Modding",
+      "author": "Flippin' Fun Video Games / SkyeSage",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": [
+        "systems",
+        "variants",
+        "edgeCases"
+      ],
+      "region": "US",
+      "language": "en",
+      "note": "Asset-edit workflow, UABE/BNE2/PPF, and the localization freeze. Facts only; no tutorial text included."
+    },
+    {
+      "id": "ffvd-baccarat-skills",
+      "title": "BaccaratTblData - Skills",
+      "author": "Flippin' Fun Video Games",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": [
+        "data",
+        "variants"
+      ],
+      "region": "US/JP",
+      "language": "en/ja",
+      "note": "English/Japanese Path IDs 1234/574 and skill-table offsets. Facts only."
+    },
+    {
+      "id": "sf-data-project",
+      "title": "SaGa Frontier Data Mechanics Guide",
+      "author": "Zaraktheus, Erroneous_Waylay, Mir_Vimes",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": [
+        "systems",
+        "data",
+        "edgeCases"
+      ],
+      "region": "US",
+      "language": "en",
+      "note": "PS1 mechanics, INIT tables, Mec/Mystic/Monster formulas, and Battle Rank packing. Facts only; no guide text included."
+    },
+    {
+      "id": "essence-of-saga",
+      "title": "The Essence of SaGa Frontier - Item Selling",
+      "author": "Essence of SaGa Frontier contributors",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": [
+        "data"
+      ],
+      "region": "US",
+      "language": "en",
+      "note": "Item sale locations used to label shop stock tables. Facts only."
+    },
+    {
+      "id": "steam-shopaholic",
+      "title": "Shopaholic shop grouping discussion",
+      "author": "Steam Community users",
+      "license": "all-rights-reserved",
+      "redistribution": "local-only",
+      "covers": [
+        "data"
+      ],
+      "region": "Global",
+      "language": "en",
+      "note": "Cross-check for shop grouping. Facts only."
+    }
+  ]
+}

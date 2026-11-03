@@ -1,0 +1,12 @@
+namespace,key_format,range,count,status,source,notes
+item,0xNN,0x00-0xFF,256,asset,"resources.assets item table @ 7,738,252","16-byte padded ASCII; 248 named, NotUse placeholders"
+character,0xNN,0x00-0x3F,64,asset,"resources.assets character table @ 7,783,498",16-byte records; save can carry 0x40 unmapped
+area,0xNN,0x00-0x44,69,asset,"resources.assets area table @ 7,782,118",20-byte records; 0-based; 26 Chateau Aiguille
+ability,0x000-0x1FF,0-511,512,documented,ability_names.json; char_record_layout.json,7 ambiguous names; 8 school blocks
+map/room,0x000-0x4B9,22-1209,869,community,maps.json; IMF_File_Names.txt,319 gaps; 425 is a gap
+enemy/form,0x00-0xFF,0-255,256,documented,monster_forms.json; mystic_absorbs.json,"form names are documented, not all observed"
+shop type,decimal,0-90,17,documented,shop_names.json,labels by stock location; gold split medium
+scenario/hero,0-8,0-8,9,documented,SystemData.HERO,"Emelia, Lute, Red, Fuse, Blue, Asellus, T260G, Riki, Rouge"
+ending,0-16,0-16,17,documented,SystemData.ENDING,0-9 named; 10-16 Fuse endings
+element flag,code,14 flags,14,documented,ability_names.json meta.element_legend,"S,P,B,H,C,E,F,X,Gr,Gz,So,Wa,Th,AA"
+init set,1-4,1-4,4,documented,init_sets.json,selected by last-clear Battle Rank
